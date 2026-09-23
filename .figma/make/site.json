@@ -1,0 +1,10 @@
+{
+  "description": "Streamline your branding process with a user-friendly platform for creating and managing logos and visual assets, perfect for businesses and freelancers.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}

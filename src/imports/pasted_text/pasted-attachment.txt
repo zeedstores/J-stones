@@ -1,0 +1,364 @@
+## PRIVATE ADMIN SYSTEM — IMPORTANT
+
+The website must include a complete visual design for a PRIVATE ADMIN AREA.
+
+This is part of the same website, not a separate SaaS dashboard.
+
+The public website and admin interface should share the same brand identity, typography and design language, but the admin should prioritize usability over visual presentation.
+
+### ADMIN ROUTES
+
+Design these routes:
+
+/admin/login
+/admin
+/admin/projects
+/admin/projects/new
+/admin/projects/:id/edit
+
+---
+
+# ADMIN LOGIN
+
+Create a simple professional login screen.
+
+Fields:
+
+Email
+Password
+
+Button:
+
+Sign in
+
+Include:
+
+* Loading state
+* Invalid credentials state
+* Empty field validation
+* Password visibility toggle
+
+Do not add unnecessary registration functionality.
+
+The eventual implementation will use authentication such as Supabase Auth.
+
+---
+
+# ADMIN DASHBOARD
+
+After login, show a lightweight dashboard.
+
+Do NOT create a massive enterprise dashboard.
+
+The primary purpose is PROJECT MANAGEMENT.
+
+Navigation:
+
+Overview
+Projects
+Settings
+Logout
+
+Main dashboard:
+
+PROJECTS
+
+Total projects
+Published
+Drafts
+
+Then:
+
+Recent projects
+
+Project
+Category
+Location
+Status
+Last updated
+Actions
+
+Primary button:
+
+* Add project
+
+---
+
+# PROJECT MANAGEMENT
+
+Create a dedicated Projects management page.
+
+Header:
+
+Projects
+
+Short supporting text:
+
+Manage the projects displayed on the public website.
+
+Primary button:
+
+* Add project
+
+Include search.
+
+Include filtering:
+
+All
+Published
+Draft
+Archived
+
+Project table/list:
+
+PROJECT
+CATEGORY
+LOCATION
+YEAR
+STATUS
+UPDATED
+ACTION
+
+Actions:
+
+Edit
+Preview
+Delete
+
+Use a clean responsive layout.
+
+On mobile, convert the table into project cards rather than forcing a wide table.
+
+---
+
+# ADD PROJECT
+
+Create a dedicated Add Project page.
+
+Title:
+
+Add project
+
+Form fields:
+
+Project name
+Project slug
+Category
+Location
+Year
+Status
+Description
+
+Then:
+
+COVER IMAGE
+
+Large drag-and-drop upload area.
+
+Then:
+
+PROJECT GALLERY
+
+Multiple image upload area.
+
+After images are uploaded:
+
+* Show thumbnails
+* Allow image removal
+* Allow image reordering
+* Identify cover image
+* Show upload progress
+
+Actions:
+
+Save draft
+Publish project
+
+---
+
+# EDIT PROJECT
+
+The Edit Project page should use the same structure as Add Project.
+
+Pre-fill all existing project information.
+
+Allow the admin to:
+
+* Change title
+* Change category
+* Change location
+* Change year
+* Change status
+* Edit description
+* Replace cover image
+* Add gallery images
+* Remove gallery images
+* Reorder gallery images
+* Save changes
+* Unpublish
+* Delete project
+
+Include a delete confirmation modal.
+
+---
+
+# PROJECT PREVIEW
+
+Include a Preview action.
+
+The admin should be able to preview how the project will appear on the public website before publishing.
+
+Preview should resemble the actual Project Detail page.
+
+Provide:
+
+Back to editor
+Publish
+
+---
+
+# EMPTY ADMIN STATE
+
+The company may start with ZERO projects.
+
+Design a beautiful empty state.
+
+Example:
+
+No projects yet.
+
+Add your first project to begin building your portfolio.
+
+Button:
+
+* Add project
+
+Do not make the empty state look broken.
+
+---
+
+# ADMIN DATA MODEL
+
+Design the interface around this project structure:
+
+id
+title
+slug
+category
+location
+year
+status
+description
+cover_image
+gallery_images
+published
+created_at
+updated_at
+
+The public Projects page must eventually consume these records dynamically.
+
+Do not hard-code project cards into the public website.
+
+---
+
+# PUBLIC ↔ ADMIN CONNECTION
+
+The design must clearly anticipate this workflow:
+
+ADMIN CREATES PROJECT
+↓
+PROJECT SAVED
+↓
+PROJECT PUBLISHED
+↓
+PUBLIC PROJECTS PAGE UPDATES
+↓
+VISITOR OPENS PROJECT
+↓
+PROJECT DETAIL PAGE DISPLAYS DATA + IMAGES
+
+If the project is unpublished:
+
+It must NOT appear publicly.
+
+If the project is deleted:
+
+It must disappear from the public project listing.
+
+---
+
+# ADMIN ACCESS
+
+The public website should contain a very discreet Admin link in the footer.
+
+Example:
+
+© 2026 Company Name
+
+Admin
+
+Clicking Admin leads to:
+
+/admin/login
+
+Do not place Admin in the main navigation.
+
+Do not advertise the admin area to normal visitors.
+
+---
+
+# FUTURE IMPLEMENTATION
+
+The visual architecture should be realistic to implement using:
+
+React
+Supabase Auth
+Supabase Database
+Supabase Storage
+
+The admin interface should eventually connect to:
+
+projects table
++
+project image storage bucket
+
+Do not design functionality that depends on Figma-only behavior.
+
+Make the interface component-based and easy to reproduce in VS Code.
+
+---
+
+# ADMIN DESIGN PHILOSOPHY
+
+The public website should be expressive.
+
+The admin should be efficient.
+
+Public:
+
+EDITORIAL
+VISUAL
+IMMERSIVE
+ANIMATED
+
+Admin:
+
+CLEAR
+FAST
+SIMPLE
+FUNCTIONAL
+
+Use the same brand fonts and colors, but reduce decorative animation inside the admin.
+
+Use subtle transitions for:
+
+* Page changes
+* Modal opening
+* Upload progress
+* Saving
+* Success notifications
+* Delete confirmations
+
+Do not over-animate the dashboard.
+
+The admin should feel like a professional tool the company can use every week without friction.
