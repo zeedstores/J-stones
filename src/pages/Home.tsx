@@ -1,6 +1,8 @@
+
 import { FormEvent, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
+import logo from '../imports/logo.png'
 
 const images = {
   hero:
@@ -79,30 +81,6 @@ type Project = {
   image_url: string | null
 }
 
-function NHLLogo() {
-  return (
-    <svg
-      className="nhl-logo"
-      viewBox="0 0 80 80"
-      aria-label="Nasal Holdings"
-      role="img"
-    >
-      <path
-        d="M40 5L69 21.5V55L40 72L11 55V21.5L40 5Z"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-      />
-      <path
-        d="M27 54V27L53 53V26"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="5"
-      />
-    </svg>
-  )
-}
-
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [openFaq, setOpenFaq] = useState<number | null>(null)
@@ -112,36 +90,38 @@ export default function Home() {
   const [projectsLoading, setProjectsLoading] = useState(true)
 
   useEffect(() => {
-  const handleScroll = () => {
-    setScrolled(window.scrollY > 40)
-  }
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 40)
+    }
 
-  window.addEventListener('scroll', handleScroll)
+    handleScroll()
 
-  const revealElements = document.querySelectorAll('[data-reveal]')
+    window.addEventListener('scroll', handleScroll)
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible')
-          observer.unobserve(entry.target)
-        }
-      })
-    },
-    {
-      threshold: 0.12,
-      rootMargin: '0px 0px -50px 0px',
-    },
-  )
+    const revealElements = document.querySelectorAll('[data-reveal]')
 
-  revealElements.forEach((element) => observer.observe(element))
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible')
+            observer.unobserve(entry.target)
+          }
+        })
+      },
+      {
+        threshold: 0.12,
+        rootMargin: '0px 0px -50px 0px',
+      },
+    )
 
-  return () => {
-    window.removeEventListener('scroll', handleScroll)
-    observer.disconnect()
-  }
-}, [projects])
+    revealElements.forEach((element) => observer.observe(element))
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      observer.disconnect()
+    }
+  }, [projects])
 
   useEffect(() => {
     async function loadProjects() {
@@ -174,9 +154,22 @@ export default function Home() {
 
   return (
     <main className="site-shell">
-      <header className={scrolled ? 'site-header is-scrolled' : 'site-header'}>
-        <a className="brand" href="#home" onClick={() => setMenuOpen(false)}>
-          <NHLLogo />
+      <header
+        className={
+          scrolled ? 'site-header is-scrolled' : 'site-header'
+        }
+      >
+        <a
+          className="brand"
+          href="#home"
+          onClick={() => setMenuOpen(false)}
+        >
+          <img
+            className={`nhl-logo ${scrolled ? 'is-dark' : ''}`}
+            src={logo}
+            alt="Nasal Holdings Limited"
+          />
+
           <span className="brand-name">NASAL HOLDINGS</span>
         </a>
 
@@ -234,6 +227,7 @@ export default function Home() {
             <span className="hero-line hero-reveal hero-reveal-two">
               Built for
             </span>
+
             <span className="hero-line hero-reveal hero-reveal-three">
               <em>where we are.</em>
             </span>
@@ -321,7 +315,11 @@ export default function Home() {
               people and build something that makes sense.
             </p>
 
-            <a className="text-link reveal" data-reveal href="#services">
+            <a
+              className="text-link reveal"
+              data-reveal
+              href="#services"
+            >
               What we do
               <span>→</span>
             </a>
@@ -342,128 +340,137 @@ export default function Home() {
       </section>
 
       <section className="section projects-section" id="projects">
-  <div className="container">
-    <div className="section-top reveal" data-reveal>
-      <div>
-        <span className="section-number">03 / Projects</span>
+        <div className="container">
+          <div className="section-top reveal" data-reveal>
+            <div>
+              <span className="section-number">03 / Projects</span>
 
-        <h2>
-          Work worth
-          <em> showing.</em>
-        </h2>
-      </div>
-
-      <p>
-        {projects.length > 0
-          ? 'A selection of completed and approved Nasal Holdings projects.'
-          : 'Places we have built, developed and continue to build are documented here.'}
-      </p>
-    </div>
-
-    {projectsLoading ? (
-      <div className="projects-loading reveal is-visible" data-reveal>
-        <div className="projects-loading-line" />
-        <span>Loading projects</span>
-      </div>
-    ) : projects.length === 0 ? (
-      <div className="projects-placeholder reveal" data-reveal>
-        <div className="projects-placeholder-image">
-          <img
-            src={images.workers}
-            alt="Construction workers building on site in Nigeria"
-          />
-
-          <div className="projects-placeholder-image-label">
-            <span>03</span>
-            <span>Work in progress</span>
-          </div>
-        </div>
-
-        <div className="projects-placeholder-content">
-          <div>
-            <span className="projects-placeholder-kicker">
-              Our work
-            </span>
-
-            <h3>
-              Projects take
-              <em> shape here.</em>
-            </h3>
+              <h2>
+                Work worth
+                <em> showing.</em>
+              </h2>
+            </div>
 
             <p>
-              As Nasal Holdings completes and approves projects, this
-              collection will become a record of the places we have built and
-              developed across Nigeria.
+              {projects.length > 0
+                ? 'A selection of completed and approved Nasal Holdings projects.'
+                : 'Places we have built, developed and continue to build are documented here.'}
             </p>
           </div>
 
-          <div className="projects-placeholder-footer">
-            <span>Construction / Development / Property</span>
-
-            <a className="text-link" href="#contact">
-              Discuss a project
-              <span>→</span>
-            </a>
-          </div>
-        </div>
-      </div>
-    ) : (
-      <div className="projects-grid">
-        {projects.map((project, index) => (
-          <article
-            className="project-card reveal"
-            data-reveal
-            key={project.id}
-            style={{ transitionDelay: `${index * 70}ms` }}
-          >
-            <div className="project-card-image">
-              {project.image_url ? (
-                <img
-                  src={project.image_url}
-                  alt={project.title}
-                />
-              ) : (
+          {projectsLoading ? (
+            <div
+              className="projects-loading reveal is-visible"
+              data-reveal
+            >
+              <div className="projects-loading-line" />
+              <span>Loading projects</span>
+            </div>
+          ) : projects.length === 0 ? (
+            <div className="projects-placeholder reveal" data-reveal>
+              <div className="projects-placeholder-image">
                 <img
                   src={images.workers}
-                  alt="Construction workers on site in Nigeria"
+                  alt="Construction workers building on site in Nigeria"
                 />
-              )}
 
-              <span className="project-card-number">
-                {String(index + 1).padStart(2, '0')}
-              </span>
-            </div>
-
-            <div className="project-card-content">
-              <div className="project-card-meta">
-                <span>{project.category || 'Project'}</span>
-                <span>{project.location || 'Nigeria'}</span>
+                <div className="projects-placeholder-image-label">
+                  <span>03</span>
+                  <span>Work in progress</span>
+                </div>
               </div>
 
-              <h3>{project.title}</h3>
+              <div className="projects-placeholder-content">
+                <div>
+                  <span className="projects-placeholder-kicker">
+                    Our work
+                  </span>
 
-              {project.description && (
-                <p>{project.description}</p>
-              )}
+                  <h3>
+                    Projects take
+                    <em> shape here.</em>
+                  </h3>
 
-              {project.completed_at && (
-                <span className="project-card-date">
-                  Completed{' '}
-                  {new Date(
-                    `${project.completed_at}T00:00:00`,
-                  ).toLocaleDateString('en-NG', {
-                    month: 'long',
-                    year: 'numeric',
-                  })}
-                </span>
-              )}
+                  <p>
+                    As Nasal Holdings completes and approves projects, this
+                    collection will become a record of the places we have built
+                    and developed across Nigeria.
+                  </p>
+                </div>
+
+                <div className="projects-placeholder-footer">
+                  <span>
+                    Construction / Development / Property
+                  </span>
+
+                  <a className="text-link" href="#contact">
+                    Discuss a project
+                    <span>→</span>
+                  </a>
+                </div>
+              </div>
             </div>
-          </article>
-        ))}
-      </div>
-    )}
-  </div>
-</section>
+          ) : (
+            <div className="projects-grid">
+              {projects.map((project, index) => (
+                <article
+                  className="project-card reveal"
+                  data-reveal
+                  key={project.id}
+                  style={{
+                    transitionDelay: `${index * 70}ms`,
+                  }}
+                >
+                  <div className="project-card-image">
+                    {project.image_url ? (
+                      <img
+                        src={project.image_url}
+                        alt={project.title}
+                      />
+                    ) : (
+                      <img
+                        src={images.workers}
+                        alt="Construction workers on site in Nigeria"
+                      />
+                    )}
+
+                    <span className="project-card-number">
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                  </div>
+
+                  <div className="project-card-content">
+                    <div className="project-card-meta">
+                      <span>{project.category || 'Project'}</span>
+                      <span>
+                        {project.location || 'Nigeria'}
+                      </span>
+                    </div>
+
+                    <h3>{project.title}</h3>
+
+                    {project.description && (
+                      <p>{project.description}</p>
+                    )}
+
+                    {project.completed_at && (
+                      <span className="project-card-date">
+                        Completed{' '}
+                        {new Date(
+                          `${project.completed_at}T00:00:00`,
+                        ).toLocaleDateString('en-NG', {
+                          month: 'long',
+                          year: 'numeric',
+                        })}
+                      </span>
+                    )}
+                  </div>
+                </article>
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
 
       <section className="services-section" id="services">
         <div className="container">
@@ -491,9 +498,13 @@ export default function Home() {
                 className="service-row reveal"
                 data-reveal
                 key={service.number}
-                style={{ transitionDelay: `${index * 70}ms` }}
+                style={{
+                  transitionDelay: `${index * 70}ms`,
+                }}
               >
-                <span className="service-number">{service.number}</span>
+                <span className="service-number">
+                  {service.number}
+                </span>
 
                 <h3>{service.title}</h3>
 
@@ -507,7 +518,10 @@ export default function Home() {
       </section>
 
       <section className="statement-section">
-        <div className="container statement-inner reveal" data-reveal>
+        <div
+          className="container statement-inner reveal"
+          data-reveal
+        >
           <span className="section-number">05 / Approach</span>
 
           <h2>
@@ -544,15 +558,20 @@ export default function Home() {
 
               return (
                 <div
-                  className={isOpen ? 'faq-item is-open' : 'faq-item'}
+                  className={
+                    isOpen ? 'faq-item is-open' : 'faq-item'
+                  }
                   key={faq.question}
                 >
                   <button
                     className="faq-question"
                     type="button"
-                    onClick={() => setOpenFaq(isOpen ? null : index)}
+                    onClick={() =>
+                      setOpenFaq(isOpen ? null : index)
+                    }
                   >
                     <span>{faq.question}</span>
+
                     <span className="faq-icon">
                       {isOpen ? '−' : '+'}
                     </span>
@@ -586,7 +605,9 @@ export default function Home() {
             </p>
 
             <div className="contact-details">
-              <a href="tel:+2340000000000">+234 000 000 0000</a>
+              <a href="tel:+2340000000000">
+                +234 000 000 0000
+              </a>
 
               <a href="mailto:info@nasalholdings.com">
                 info@nasalholdings.com
@@ -615,7 +636,10 @@ export default function Home() {
                 </button>
               </div>
             ) : (
-              <form className="contact-form" onSubmit={handleSubmit}>
+              <form
+                className="contact-form"
+                onSubmit={handleSubmit}
+              >
                 <label>
                   <span>Name</span>
                   <input type="text" name="name" required />
@@ -629,7 +653,10 @@ export default function Home() {
                 <label>
                   <span>Project type</span>
 
-                  <select name="projectType" defaultValue="">
+                  <select
+                    name="projectType"
+                    defaultValue=""
+                  >
                     <option value="" disabled>
                       Select one
                     </option>
@@ -664,7 +691,10 @@ export default function Home() {
                   />
                 </label>
 
-                <button className="form-submit" type="submit">
+                <button
+                  className="form-submit"
+                  type="submit"
+                >
                   Send enquiry
                   <span>→</span>
                 </button>
@@ -677,11 +707,17 @@ export default function Home() {
       <footer className="site-footer">
         <div className="container footer-top">
           <div className="footer-brand">
-            <NHLLogo />
+            <img
+              className="nhl-logo"
+              src={logo}
+              alt="Nasal Holdings Limited"
+            />
 
             <div>
               <strong>NASAL HOLDINGS LIMITED</strong>
-              <span>Property • Construction • Development</span>
+              <span>
+                Property • Construction • Development
+              </span>
             </div>
           </div>
 
@@ -692,10 +728,14 @@ export default function Home() {
         </div>
 
         <div className="container footer-bottom">
-          <span>© {new Date().getFullYear()} Nasal Holdings Limited</span>
+          <span>
+            © {new Date().getFullYear()} Nasal Holdings Limited
+          </span>
+
           <span>Built in Nigeria</span>
         </div>
       </footer>
     </main>
   )
 }
+

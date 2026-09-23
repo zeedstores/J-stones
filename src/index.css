@@ -126,9 +126,17 @@ img {
 }
 
 .nhl-logo {
-  width: 34px;
-  height: 34px;
+  width: 86px;
+  height: 86px;
   flex-shrink: 0;
+}
+
+.nhl-logo {
+  transition: filter 0.3s ease;
+}
+
+.nhl-logo.is-dark {
+  filter: brightness(0);
 }
 
 .brand-name {
