@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import AdminLayout from './AdminLayout'
@@ -16,19 +15,19 @@ type Project = {
 function StatusBadge({ status }: { status: string }) {
   const styles: Record<string, React.CSSProperties> = {
     published: {
-      backgroundColor: '#0d2b1a',
-      color: '#4ade80',
-      border: '1px solid #166534',
+      backgroundColor: '#E8F2EC',
+      color: '#176B3A',
+      border: '1px solid #B8D8C3',
     },
     draft: {
-      backgroundColor: '#1a1a0d',
-      color: '#facc15',
-      border: '1px solid #854d0e',
+      backgroundColor: '#FFF3E7',
+      color: '#A9570B',
+      border: '1px solid #E8C9A5',
     },
     archived: {
-      backgroundColor: '#1a0d0d',
-      color: '#f87171',
-      border: '1px solid #7f1d1d',
+      backgroundColor: '#F5EAEA',
+      color: '#9B3434',
+      border: '1px solid #E2BABA',
     },
   }
 
@@ -36,11 +35,12 @@ function StatusBadge({ status }: { status: string }) {
     <span
       style={{
         ...styles[status] ?? styles.draft,
+        display: 'inline-block',
         fontSize: '0.62rem',
         letterSpacing: '0.12em',
         textTransform: 'uppercase',
-        padding: '0.2rem 0.6rem',
-        fontWeight: 600,
+        padding: '0.3rem 0.65rem',
+        fontWeight: 700,
       }}
     >
       {status}
@@ -99,57 +99,81 @@ export default function Dashboard() {
       <div
         style={{
           display: 'flex',
-          alignItems: 'center',
+          alignItems: 'flex-end',
           justifyContent: 'space-between',
-          marginBottom: '2rem',
-          gap: '1rem',
+          marginBottom: '2.5rem',
+          gap: '1.5rem',
           flexWrap: 'wrap',
         }}
       >
         <div>
-          <h1
+          <span
             style={{
-              fontFamily: "'Fraunces', serif",
-              fontWeight: 400,
-              fontSize: '1.8rem',
-              color: '#f2ede6',
+              display: 'block',
+              color: '#D97924',
+              fontSize: '0.65rem',
+              letterSpacing: '0.16em',
+              textTransform: 'uppercase',
+              fontWeight: 700,
+              marginBottom: '0.7rem',
             }}
           >
-            Overview
+            J-STONES / Admin
+          </span>
+
+          <h1
+            style={{
+              margin: 0,
+              fontFamily: "'Instrument Serif', Georgia, serif",
+              fontWeight: 400,
+              fontSize: 'clamp(2rem, 4vw, 3rem)',
+              lineHeight: 1,
+              color: '#101820',
+              letterSpacing: '-0.03em',
+            }}
+          >
+            Project overview
           </h1>
 
           <p
             style={{
-              color: '#8a8489',
-              fontSize: '0.85rem',
-              marginTop: 4,
+              color: '#66717C',
+              fontSize: '0.82rem',
+              marginTop: '0.7rem',
+              lineHeight: 1.6,
             }}
           >
-            Welcome back. Here's what's happening.
+            Manage J-STONES projects and keep the portfolio up to date.
           </p>
         </div>
 
         <Link
           to="/admin/projects/new"
           style={{
-            backgroundColor: '#c49a26',
-            color: '#09080a',
-            padding: '0.65rem 1.4rem',
-            fontSize: '0.75rem',
-            letterSpacing: '0.1em',
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '0.65rem',
+            backgroundColor: '#D97924',
+            color: '#FFFFFF',
+            padding: '0.75rem 1.15rem',
+            fontSize: '0.7rem',
+            letterSpacing: '0.09em',
             textTransform: 'uppercase',
-            fontWeight: 600,
+            fontWeight: 700,
             textDecoration: 'none',
-            transition: 'opacity 0.2s',
+            transition: 'all 0.2s ease',
           }}
-          onMouseEnter={e =>
-            (e.currentTarget.style.opacity = '0.85')
-          }
-          onMouseLeave={e =>
-            (e.currentTarget.style.opacity = '1')
-          }
+          onMouseEnter={e => {
+            e.currentTarget.style.backgroundColor = '#B96118'
+            e.currentTarget.style.transform = 'translateY(-1px)'
+          }}
+          onMouseLeave={e => {
+            e.currentTarget.style.backgroundColor = '#D97924'
+            e.currentTarget.style.transform = 'translateY(0)'
+          }}
         >
-          + Add Project
+          <span style={{ fontSize: '1rem', lineHeight: 1 }}>+</span>
+          Add Project
         </Link>
       </div>
 
@@ -157,9 +181,8 @@ export default function Dashboard() {
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(3, 1fr)',
-          gap: '1px',
-          backgroundColor: '#2a2630',
+          gridTemplateColumns: 'repeat(3, minmax(0, 1fr))',
+          gap: '1rem',
           marginBottom: '2rem',
         }}
       >
@@ -167,48 +190,69 @@ export default function Dashboard() {
           {
             label: 'Total Projects',
             value: loading ? '—' : totalProjects,
+            detail: 'All project records',
           },
           {
             label: 'Published',
             value: loading ? '—' : publishedProjects,
+            detail: 'Visible on website',
           },
           {
             label: 'Drafts',
             value: loading ? '—' : draftProjects,
+            detail: 'Not yet published',
           },
         ].map(stat => (
           <div
             key={stat.label}
             style={{
-              backgroundColor: '#131113',
-              padding: '1.5rem',
+              backgroundColor: '#FFFFFF',
+              border: '1px solid #C7CED6',
+              padding: '1.35rem 1.4rem',
+              minHeight: 125,
               display: 'flex',
               flexDirection: 'column',
-              gap: '0.4rem',
+              justifyContent: 'space-between',
+              boxSizing: 'border-box',
             }}
           >
             <span
               style={{
-                fontFamily: "'Fraunces', serif",
-                fontSize: '2.4rem',
-                fontWeight: 300,
-                color: '#c49a26',
+                fontFamily: "'Instrument Serif', Georgia, serif",
+                fontSize: '2.5rem',
+                fontWeight: 400,
+                color: '#0B3768',
                 lineHeight: 1,
               }}
             >
               {stat.value}
             </span>
 
-            <span
-              style={{
-                fontSize: '0.72rem',
-                letterSpacing: '0.12em',
-                color: '#8a8489',
-                textTransform: 'uppercase',
-              }}
-            >
-              {stat.label}
-            </span>
+            <div>
+              <span
+                style={{
+                  display: 'block',
+                  fontSize: '0.68rem',
+                  letterSpacing: '0.1em',
+                  color: '#101820',
+                  textTransform: 'uppercase',
+                  fontWeight: 700,
+                }}
+              >
+                {stat.label}
+              </span>
+
+              <span
+                style={{
+                  display: 'block',
+                  fontSize: '0.7rem',
+                  color: '#66717C',
+                  marginTop: '0.25rem',
+                }}
+              >
+                {stat.detail}
+              </span>
+            </div>
           </div>
         ))}
       </div>
@@ -216,36 +260,53 @@ export default function Dashboard() {
       {/* Recent projects */}
       <div
         style={{
-          backgroundColor: '#131113',
-          border: '1px solid #2a2630',
+          backgroundColor: '#FFFFFF',
+          border: '1px solid #C7CED6',
         }}
       >
         <div
           style={{
-            padding: '1.25rem 1.5rem',
-            borderBottom: '1px solid #2a2630',
+            padding: '1.2rem 1.4rem',
+            borderBottom: '1px solid #C7CED6',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
+            gap: '1rem',
           }}
         >
-          <h2
-            style={{
-              fontFamily: "'Fraunces', serif",
-              fontWeight: 400,
-              fontSize: '1.1rem',
-              color: '#f2ede6',
-            }}
-          >
-            Recent Projects
-          </h2>
+          <div>
+            <h2
+              style={{
+                margin: 0,
+                fontFamily: "'Instrument Serif', Georgia, serif",
+                fontWeight: 400,
+                fontSize: '1.35rem',
+                color: '#101820',
+              }}
+            >
+              Recent projects
+            </h2>
+
+            <p
+              style={{
+                margin: '0.3rem 0 0',
+                color: '#66717C',
+                fontSize: '0.72rem',
+              }}
+            >
+              The latest project updates
+            </p>
+          </div>
 
           <Link
             to="/admin/projects"
             style={{
-              color: '#c49a26',
-              fontSize: '0.75rem',
+              color: '#0B3768',
+              fontSize: '0.7rem',
+              letterSpacing: '0.05em',
               textDecoration: 'none',
+              fontWeight: 700,
+              whiteSpace: 'nowrap',
             }}
           >
             View all →
@@ -257,8 +318,8 @@ export default function Dashboard() {
             <div
               style={{
                 padding: '2rem 1.5rem',
-                color: '#f87171',
-                fontSize: '0.85rem',
+                color: '#9B3434',
+                fontSize: '0.82rem',
               }}
             >
               {error}
@@ -267,8 +328,8 @@ export default function Dashboard() {
             <div
               style={{
                 padding: '2rem 1.5rem',
-                color: '#8a8489',
-                fontSize: '0.85rem',
+                color: '#66717C',
+                fontSize: '0.82rem',
               }}
             >
               Loading projects...
@@ -277,23 +338,26 @@ export default function Dashboard() {
             <div
               style={{
                 padding: '2.5rem 1.5rem',
-                color: '#8a8489',
-                fontSize: '0.85rem',
+                color: '#66717C',
+                fontSize: '0.82rem',
               }}
             >
-              No projects yet. Add your first project to get started.
+              No projects yet. Add your first J-STONES project to get
+              started.
             </div>
           ) : (
             <table
               style={{
                 width: '100%',
                 borderCollapse: 'collapse',
+                minWidth: 760,
               }}
             >
               <thead>
                 <tr
                   style={{
-                    borderBottom: '1px solid #2a2630',
+                    borderBottom: '1px solid #C7CED6',
+                    backgroundColor: '#F5F3EE',
                   }}
                 >
                   {[
@@ -307,13 +371,13 @@ export default function Dashboard() {
                     <th
                       key={header}
                       style={{
-                        padding: '0.75rem 1.5rem',
+                        padding: '0.75rem 1.2rem',
                         textAlign: 'left',
-                        fontSize: '0.62rem',
-                        letterSpacing: '0.15em',
+                        fontSize: '0.6rem',
+                        letterSpacing: '0.13em',
                         textTransform: 'uppercase',
-                        color: '#8a8489',
-                        fontWeight: 500,
+                        color: '#66717C',
+                        fontWeight: 700,
                         whiteSpace: 'nowrap',
                       }}
                     >
@@ -335,13 +399,13 @@ export default function Dashboard() {
                       style={{
                         borderBottom:
                           index < recentProjects.length - 1
-                            ? '1px solid #1d1b1e'
+                            ? '1px solid #E1E5E9'
                             : 'none',
                         transition: 'background-color 0.15s',
                       }}
                       onMouseEnter={e =>
                         (e.currentTarget.style.backgroundColor =
-                          '#1a181b')
+                          '#F8F9FA')
                       }
                       onMouseLeave={e =>
                         (e.currentTarget.style.backgroundColor =
@@ -350,10 +414,10 @@ export default function Dashboard() {
                     >
                       <td
                         style={{
-                          padding: '1rem 1.5rem',
-                          color: '#f2ede6',
-                          fontSize: '0.88rem',
-                          fontWeight: 500,
+                          padding: '1rem 1.2rem',
+                          color: '#101820',
+                          fontSize: '0.84rem',
+                          fontWeight: 600,
                         }}
                       >
                         {project.title}
@@ -361,9 +425,9 @@ export default function Dashboard() {
 
                       <td
                         style={{
-                          padding: '1rem 1.5rem',
-                          color: '#8a8489',
-                          fontSize: '0.82rem',
+                          padding: '1rem 1.2rem',
+                          color: '#66717C',
+                          fontSize: '0.78rem',
                         }}
                       >
                         {project.category || '—'}
@@ -371,9 +435,9 @@ export default function Dashboard() {
 
                       <td
                         style={{
-                          padding: '1rem 1.5rem',
-                          color: '#8a8489',
-                          fontSize: '0.82rem',
+                          padding: '1rem 1.2rem',
+                          color: '#66717C',
+                          fontSize: '0.78rem',
                         }}
                       >
                         {project.location || '—'}
@@ -381,7 +445,7 @@ export default function Dashboard() {
 
                       <td
                         style={{
-                          padding: '1rem 1.5rem',
+                          padding: '1rem 1.2rem',
                         }}
                       >
                         <StatusBadge status={status} />
@@ -389,9 +453,10 @@ export default function Dashboard() {
 
                       <td
                         style={{
-                          padding: '1rem 1.5rem',
-                          color: '#8a8489',
-                          fontSize: '0.82rem',
+                          padding: '1rem 1.2rem',
+                          color: '#66717C',
+                          fontSize: '0.78rem',
+                          whiteSpace: 'nowrap',
                         }}
                       >
                         {formatDate(project.updated_at)}
@@ -399,16 +464,18 @@ export default function Dashboard() {
 
                       <td
                         style={{
-                          padding: '1rem 1.5rem',
+                          padding: '1rem 1.2rem',
+                          whiteSpace: 'nowrap',
                         }}
                       >
                         <Link
                           to={`/admin/projects/${project.id}/edit`}
                           style={{
-                            color: '#c49a26',
-                            fontSize: '0.78rem',
+                            color: '#0B3768',
+                            fontSize: '0.75rem',
                             textDecoration: 'none',
                             marginRight: '1rem',
+                            fontWeight: 700,
                           }}
                         >
                           Edit
@@ -417,8 +484,8 @@ export default function Dashboard() {
                         <Link
                           to={`/admin/projects/${project.id}/preview`}
                           style={{
-                            color: '#8a8489',
-                            fontSize: '0.78rem',
+                            color: '#66717C',
+                            fontSize: '0.75rem',
                             textDecoration: 'none',
                           }}
                         >
@@ -436,4 +503,3 @@ export default function Dashboard() {
     </AdminLayout>
   )
 }
-

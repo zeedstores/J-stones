@@ -85,15 +85,16 @@ export default function ProjectPreview() {
       <div
         style={{
           minHeight: '100vh',
-          backgroundColor: '#09080a',
-          color: '#f2ede6',
+          backgroundColor: '#F5F3EE',
+          color: '#101820',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          fontFamily: "'Work Sans', sans-serif",
+          fontFamily: "'DM Sans', sans-serif",
+          fontSize: '0.8rem',
         }}
       >
-        Loading project...
+        Loading project…
       </div>
     )
   }
@@ -103,30 +104,37 @@ export default function ProjectPreview() {
       <div
         style={{
           minHeight: '100vh',
-          backgroundColor: '#09080a',
-          color: '#f2ede6',
+          backgroundColor: '#F5F3EE',
+          color: '#101820',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
           gap: '1rem',
           padding: '2rem',
-          fontFamily: "'Work Sans', sans-serif",
+          fontFamily: "'DM Sans', sans-serif",
         }}
       >
-        <p style={{ color: '#f87171' }}>
+        <p
+          style={{
+            color: '#9B3434',
+            fontSize: '0.82rem',
+          }}
+        >
           {error || 'Project not found.'}
         </p>
 
         <button
           onClick={() => navigate('/admin/projects')}
           style={{
-            background: 'none',
-            border: '1px solid #2a2630',
-            color: '#f2ede6',
-            padding: '0.6rem 1.2rem',
+            background: '#FFFFFF',
+            border: '1px solid #C7CED6',
+            color: '#101820',
+            padding: '0.65rem 1.2rem',
             cursor: 'pointer',
-            fontFamily: "'Work Sans', sans-serif",
+            fontFamily: "'DM Sans', sans-serif",
+            fontSize: '0.7rem',
+            fontWeight: 700,
           }}
         >
           ← Back to Projects
@@ -145,17 +153,17 @@ export default function ProjectPreview() {
     <div
       style={{
         minHeight: '100vh',
-        backgroundColor: '#09080a',
-        fontFamily: "'Work Sans', sans-serif",
-        color: '#f2ede6',
+        backgroundColor: '#F5F3EE',
+        fontFamily: "'DM Sans', sans-serif",
+        color: '#101820',
       }}
     >
       {/* Preview bar */}
       <div
         style={{
-          backgroundColor: '#1a1510',
-          borderBottom: '1px solid #c49a2640',
-          padding: '0.75rem 1.5rem',
+          backgroundColor: '#0B3768',
+          color: '#FFFFFF',
+          padding: '0.7rem 1.5rem',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
@@ -164,24 +172,26 @@ export default function ProjectPreview() {
           position: 'sticky',
           top: 0,
           zIndex: 50,
+          boxShadow: '0 2px 12px rgba(16, 24, 32, 0.12)',
         }}
       >
         <div
           style={{
             display: 'flex',
             alignItems: 'center',
-            gap: '0.75rem',
+            gap: '0.7rem',
+            flexWrap: 'wrap',
           }}
         >
           <span
             style={{
-              fontSize: '0.65rem',
-              letterSpacing: '0.2em',
-              color: '#c49a26',
+              fontSize: '0.6rem',
+              letterSpacing: '0.16em',
+              color: '#FFFFFF',
               textTransform: 'uppercase',
-              backgroundColor: '#c49a2620',
-              border: '1px solid #c49a2640',
-              padding: '0.25rem 0.6rem',
+              backgroundColor: '#D97924',
+              padding: '0.3rem 0.6rem',
+              fontWeight: 700,
             }}
           >
             Preview Mode
@@ -189,56 +199,59 @@ export default function ProjectPreview() {
 
           <span
             style={{
-              color: '#8a8489',
-              fontSize: '0.8rem',
+              color: 'rgba(255,255,255,0.7)',
+              fontSize: '0.72rem',
             }}
           >
-            This is how the project will appear publicly
+            This is how the project will appear publicly.
           </span>
         </div>
 
         <div
           style={{
             display: 'flex',
-            gap: '0.75rem',
+            gap: '0.6rem',
+            flexWrap: 'wrap',
           }}
         >
           <button
             onClick={() => navigate(`/admin/projects/${id}/edit`)}
             style={{
-              background: 'none',
-              border: '1px solid #2a2630',
-              color: '#f2ede6',
-              padding: '0.5rem 1.1rem',
-              fontSize: '0.72rem',
-              letterSpacing: '0.08em',
+              background: 'transparent',
+              border: '1px solid rgba(255,255,255,0.3)',
+              color: '#FFFFFF',
+              padding: '0.5rem 1rem',
+              fontSize: '0.68rem',
+              letterSpacing: '0.06em',
               textTransform: 'uppercase',
               cursor: 'pointer',
-              fontFamily: "'Work Sans', sans-serif",
+              fontFamily: "'DM Sans', sans-serif",
+              fontWeight: 700,
             }}
           >
-            ← Back to Editor
+            ← Edit
           </button>
 
           <button
             onClick={togglePublished}
             disabled={actionLoading}
             style={{
-              backgroundColor: '#c49a26',
-              color: '#09080a',
+              backgroundColor: actionLoading
+                ? '#7890A8'
+                : '#D97924',
+              color: '#FFFFFF',
               border: 'none',
-              padding: '0.5rem 1.1rem',
-              fontSize: '0.72rem',
-              letterSpacing: '0.08em',
+              padding: '0.5rem 1rem',
+              fontSize: '0.68rem',
+              letterSpacing: '0.06em',
               textTransform: 'uppercase',
-              fontWeight: 600,
+              fontWeight: 700,
               cursor: actionLoading ? 'wait' : 'pointer',
-              fontFamily: "'Work Sans', sans-serif",
-              opacity: actionLoading ? 0.7 : 1,
+              fontFamily: "'DM Sans', sans-serif",
             }}
           >
             {actionLoading
-              ? 'Updating...'
+              ? 'Updating…'
               : project.published
                 ? 'Unpublish'
                 : 'Publish'}
@@ -251,10 +264,10 @@ export default function ProjectPreview() {
         <div
           style={{
             padding: '0.75rem 1.5rem',
-            backgroundColor: '#1a0d0d',
-            borderBottom: '1px solid #7f1d1d',
-            color: '#f87171',
-            fontSize: '0.8rem',
+            backgroundColor: '#F9EEEE',
+            borderBottom: '1px solid #E2BABA',
+            color: '#9B3434',
+            fontSize: '0.78rem',
           }}
         >
           {error}
@@ -266,8 +279,9 @@ export default function ProjectPreview() {
         style={{
           position: 'relative',
           height: '60vh',
-          minHeight: 360,
-          backgroundColor: '#131113',
+          minHeight: 380,
+          backgroundColor: '#0B3768',
+          overflow: 'hidden',
         }}
       >
         {project.image_url ? (
@@ -279,7 +293,6 @@ export default function ProjectPreview() {
               height: '100%',
               objectFit: 'cover',
               display: 'block',
-              opacity: 0.6,
             }}
           />
         ) : (
@@ -287,13 +300,13 @@ export default function ProjectPreview() {
             style={{
               width: '100%',
               height: '100%',
-              backgroundColor: '#1a181b',
+              backgroundColor: '#174A7F',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              color: '#8a8489',
-              fontSize: '0.8rem',
-              letterSpacing: '0.1em',
+              color: 'rgba(255,255,255,0.6)',
+              fontSize: '0.7rem',
+              letterSpacing: '0.12em',
               textTransform: 'uppercase',
             }}
           >
@@ -306,24 +319,29 @@ export default function ProjectPreview() {
             position: 'absolute',
             inset: 0,
             background:
-              'linear-gradient(to top, #09080a 0%, transparent 60%)',
+              'linear-gradient(to top, rgba(16,24,32,0.9) 0%, rgba(16,24,32,0.1) 65%, rgba(16,24,32,0.05) 100%)',
           }}
         />
 
         <div
           style={{
             position: 'absolute',
-            bottom: '2.5rem',
-            left: 'clamp(1.5rem, 6vw, 5rem)',
-            right: 'clamp(1.5rem, 6vw, 5rem)',
+            bottom: 'clamp(2rem, 5vw, 4rem)',
+            left: 'clamp(1.5rem, 7vw, 6rem)',
+            right: 'clamp(1.5rem, 7vw, 6rem)',
+            maxWidth: 1000,
           }}
         >
           <span
             style={{
-              fontSize: '0.65rem',
-              letterSpacing: '0.22em',
-              color: '#c49a26',
+              display: 'inline-block',
+              fontSize: '0.62rem',
+              letterSpacing: '0.18em',
+              color: '#FFFFFF',
               textTransform: 'uppercase',
+              backgroundColor: '#D97924',
+              padding: '0.35rem 0.65rem',
+              fontWeight: 700,
             }}
           >
             {project.category || 'Project'}
@@ -331,12 +349,14 @@ export default function ProjectPreview() {
 
           <h1
             style={{
-              fontFamily: "'Fraunces', serif",
-              fontWeight: 300,
-              fontSize: 'clamp(2rem, 4vw, 3.5rem)',
-              color: '#f2ede6',
-              lineHeight: 1.1,
-              marginTop: 8,
+              fontFamily: "'Instrument Serif', Georgia, serif",
+              fontWeight: 400,
+              fontSize: 'clamp(2.4rem, 6vw, 5.5rem)',
+              color: '#FFFFFF',
+              lineHeight: 0.95,
+              margin: '0.8rem 0 0',
+              letterSpacing: '-0.04em',
+              maxWidth: 900,
             }}
           >
             {project.title}
@@ -344,22 +364,24 @@ export default function ProjectPreview() {
         </div>
       </div>
 
-      {/* Meta + description */}
+      {/* Project information */}
       <div
         style={{
-          padding: 'clamp(2rem,5vw,4rem) clamp(1.5rem,6vw,5rem)',
-          maxWidth: 900,
+          padding:
+            'clamp(2rem, 5vw, 4rem) clamp(1.5rem, 7vw, 6rem)',
+          maxWidth: 1100,
           margin: '0 auto',
+          boxSizing: 'border-box',
         }}
       >
         <div
           style={{
-            display: 'flex',
-            gap: '3rem',
-            flexWrap: 'wrap',
-            marginBottom: '2.5rem',
-            borderBottom: '1px solid #2a2630',
-            paddingBottom: '2rem',
+            display: 'grid',
+            gridTemplateColumns:
+              'repeat(4, minmax(0, 1fr))',
+            borderTop: '1px solid #C7CED6',
+            borderBottom: '1px solid #C7CED6',
+            marginBottom: '3rem',
           }}
         >
           {[
@@ -372,22 +394,32 @@ export default function ProjectPreview() {
               val: year,
             },
             {
-              label: 'Category',
+              label: 'Service',
               val: project.category || '—',
             },
             {
               label: 'Status',
               val: status,
             },
-          ].map(meta => (
-            <div key={meta.label}>
+          ].map((meta, index) => (
+            <div
+              key={meta.label}
+              style={{
+                padding: '1.25rem 1rem',
+                borderRight:
+                  index < 3
+                    ? '1px solid #C7CED6'
+                    : 'none',
+              }}
+            >
               <p
                 style={{
-                  fontSize: '0.6rem',
-                  letterSpacing: '0.2em',
-                  color: '#c49a26',
+                  fontSize: '0.58rem',
+                  letterSpacing: '0.15em',
+                  color: '#D97924',
                   textTransform: 'uppercase',
-                  marginBottom: 4,
+                  margin: 0,
+                  fontWeight: 700,
                 }}
               >
                 {meta.label}
@@ -395,9 +427,12 @@ export default function ProjectPreview() {
 
               <p
                 style={{
-                  color: '#f2ede6',
-                  fontSize: '0.92rem',
+                  color: '#101820',
+                  fontSize: '0.82rem',
+                  margin: '0.45rem 0 0',
                   textTransform: 'capitalize',
+                  lineHeight: 1.4,
+                  fontWeight: 600,
                 }}
               >
                 {meta.val}
@@ -406,16 +441,59 @@ export default function ProjectPreview() {
           ))}
         </div>
 
-        <p
+        <div
           style={{
-            color: '#8a8489',
-            fontSize: '1rem',
-            lineHeight: 1.8,
+            maxWidth: 780,
           }}
         >
-          {project.description || 'No project description added yet.'}
-        </p>
+          <span
+            style={{
+              display: 'block',
+              color: '#0B3768',
+              fontSize: '0.62rem',
+              letterSpacing: '0.15em',
+              textTransform: 'uppercase',
+              fontWeight: 700,
+              marginBottom: '0.8rem',
+            }}
+          >
+            Project overview
+          </span>
+
+          <p
+            style={{
+              color: '#3E4A55',
+              fontFamily:
+                "'Instrument Serif', Georgia, serif",
+              fontSize: 'clamp(1.4rem, 2.5vw, 2rem)',
+              lineHeight: 1.45,
+              margin: 0,
+            }}
+          >
+            {project.description ||
+              'No project description added yet.'}
+          </p>
+        </div>
       </div>
+
+      {/* Footer */}
+      <footer
+        style={{
+          borderTop: '1px solid #C7CED6',
+          padding:
+            '1.25rem clamp(1.5rem, 7vw, 6rem)',
+          display: 'flex',
+          justifyContent: 'space-between',
+          gap: '1rem',
+          flexWrap: 'wrap',
+          color: '#66717C',
+          fontSize: '0.65rem',
+          letterSpacing: '0.04em',
+        }}
+      >
+        <span>J-STONES Construction Company Limited</span>
+        <span>Project Preview</span>
+      </footer>
     </div>
   )
 }

@@ -3,10 +3,12 @@ import { FormEvent, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
 import logo from '../imports/logo.png'
+import heroImage from '../imports/hero-image.png'
+import constructionImage from '../imports/image-construction.jpg'
+
 
 const images = {
-  hero:
-    'https://upload.wikimedia.org/wikipedia/commons/f/fe/Building_construction_in_Abuja.jpg',
+ hero: heroImage,
 
   construction:
     'https://upload.wikimedia.org/wikipedia/commons/f/f4/Building_construction_in_Abuja_01.jpg',
@@ -17,59 +19,75 @@ const images = {
 
 const services = [
   {
-    number: '01',
-    title: 'Building Construction',
-    text: 'Residential and commercial construction managed from groundwork through completion.',
-  },
+  number: '01',
+  title: 'Architectural Designs',
+  text: 'Architectural planning and design for residential and commercial projects.',
+},
   {
-    number: '02',
-    title: 'Property Development',
-    text: 'Development of practical properties designed around how people actually live and work.',
-  },
-  {
-    number: '03',
-    title: 'Architectural Design',
-    text: 'Planning and design solutions that balance function, structure and local context.',
-  },
-  {
-    number: '04',
-    title: 'Project Management',
-    text: 'Coordinating people, materials, timelines and construction activity on site.',
-  },
-  {
-    number: '05',
-    title: 'Property Investment',
-    text: 'Identifying and developing property opportunities with long-term value in mind.',
-  },
-  {
-    number: '06',
-    title: 'Land & Development',
-    text: 'Land acquisition and development opportunities across carefully selected locations.',
-  },
+  number: '02',
+  title: 'Project Management',
+  text: 'Professional coordination and management of construction projects.',
+},
+
+{
+  number: '03',
+  title: 'Building Construction',
+  text: 'Building construction from foundation through completion.',
+},
+
+{
+  number: '04',
+  title: 'Concrete Floor Concepts',
+  text: 'Durable concrete flooring solutions and finishes.',
+},
+
+{
+  number: '05',
+  title: 'Landscaping',
+  text: 'Landscape design and finishing for outdoor spaces.',
+},
+
+{
+  number: '06',
+  title: 'Interlocking Paving Stones',
+  text: 'Installation of interlocking paving for outdoor spaces.',
+},
+{
+  number: '07',
+  title: 'Modern Tyrolean',
+  text: 'Modern textured finishes for clean, durable exterior surfaces.',
+},
+
+{
+  number: '08',
+  title: 'Managerial Consultancy',
+  text: 'Professional consultancy for construction and project management.',
+},
 ]
 
 const faqs = [
-  {
-    question: 'What type of projects do you handle?',
-    answer:
-      'We work across residential, commercial and property-development projects, depending on the requirements of each client.',
-  },
-  {
-    question: 'Where do you operate?',
-    answer:
-      'Nasal Holdings is based in Nigeria, with its work and development interests focused on Nigerian property and construction opportunities.',
-  },
-  {
-    question: 'Can I discuss a project before making a commitment?',
-    answer:
-      'Yes. The first step is simply to discuss the project, requirements, location and intended scope so the appropriate next steps can be established.',
-  },
-  {
-    question: 'Do you work with individual property owners?',
-    answer:
-      'Yes. Projects can be discussed with individual property owners as well as businesses and development partners.',
-  },
+{
+question: 'What services does J-STONES provide?',
+answer:
+'We provide architectural designs, project management, building construction, concrete floor concepts, landscaping, interlocking paving stones, modern Tyrolean finishes and managerial consultancy.',
+},
+{
+question: 'What types of construction projects do you handle?',
+answer:
+'We handle construction and finishing projects based on the client’s requirements, scope, location and project objectives.',
+},
+{
+question: 'Can I discuss my project before making a commitment?',
+answer:
+'Yes. You can discuss your project with us first so we can understand your requirements, provide guidance and determine the appropriate next steps.',
+},
+{
+question: 'Do you work with individual property owners?',
+answer:
+'Yes. We work with individual property owners, businesses and other clients looking for professional construction, design, finishing or project management services.',
+},
 ]
+
 
 type Project = {
   id: string
@@ -165,12 +183,12 @@ export default function Home() {
           onClick={() => setMenuOpen(false)}
         >
           <img
-            className={`nhl-logo ${scrolled ? 'is-dark' : ''}`}
-            src={logo}
-            alt="Nasal Holdings Limited"
-          />
+  className={`nhl-logo ${scrolled ? 'is-dark' : ''}`}
+  src={logo}
+  alt="J-STONES Construction Company Limited"
+/>
 
-          <span className="brand-name">NASAL HOLDINGS</span>
+<span className="brand-name">J-STONES CONSTRUCTION</span>
         </a>
 
         <nav className="desktop-nav">
@@ -216,261 +234,252 @@ export default function Home() {
         </div>
       )}
 
-      <section className="hero" id="home">
-        <div className="hero-copy">
-          <div className="eyebrow hero-reveal hero-reveal-one">
-            <span className="eyebrow-line" />
-            Property • Construction • Development
-          </div>
+    <section className="hero" id="home">
+  <div className="hero-copy">
+    
+    <h1 className="hero-title">
+      <span className="hero-line hero-reveal hero-reveal-two">
+        We build
+      </span>
 
-          <h1 className="hero-title">
-            <span className="hero-line hero-reveal hero-reveal-two">
-              Built for
-            </span>
+      <span className="hero-line hero-reveal hero-reveal-three">
+        what <em>stands.</em>
+      </span>
+    </h1>
 
-            <span className="hero-line hero-reveal hero-reveal-three">
-              <em>where we are.</em>
-            </span>
-          </h1>
+    <p className="hero-description hero-reveal hero-reveal-four">
+      J-STONES Construction Company Limited delivers construction,
+      development and project management solutions built around quality,
+      precision and lasting value.
+    </p>
 
-          <p className="hero-description hero-reveal hero-reveal-four">
-            Nasal Holdings Limited develops, builds and manages property
-            projects with a focus on practical Nigerian spaces and long-term
-            value.
-          </p>
+    <div className="hero-actions hero-reveal hero-reveal-five">
+      <a className="button button-dark" href="#projects">
+        View our work
+        <span>↗</span>
+      </a>
 
-          <div className="hero-actions hero-reveal hero-reveal-five">
-            <a className="button button-dark" href="#projects">
-              View our work
-              <span>↗</span>
-            </a>
+      <a className="text-link" href="#contact">
+        Start a project
+        <span>→</span>
+      </a>
+    </div>
+  </div>
 
-            <a className="text-link" href="#contact">
-              Discuss a project
-              <span>→</span>
-            </a>
-          </div>
+  <div className="hero-visual hero-reveal hero-reveal-image">
+    <div className="hero-image-wrap">
+      <img
+        src={images.hero}
+        alt="J-STONES construction project in Nigeria"
+      />
 
-          <div className="hero-location hero-reveal hero-reveal-six">
-            <span>Based in Nigeria</span>
-            <span className="location-dot" />
-            <span>Building locally. Thinking long-term.</span>
-          </div>
-        </div>
+<div className="hero-image-label">
+  <span className="ambassador-tag">BRAND AMBASSADOR</span>
 
-        <div className="hero-visual hero-reveal hero-reveal-image">
-          <div className="hero-image-wrap">
-            <img
-              src={images.hero}
-              alt="Construction site in Abuja, Nigeria"
-            />
+  <span className="ambassador-name">
+    Sir Comedian ONE ON ONE
+    <small>(Woman Leader)</small>
+  </span>
+</div>
+    </div>
 
-            <div className="hero-image-label">
-              <span>01</span>
-              <span>Construction / Nigeria</span>
-            </div>
-          </div>
-
-          <div className="hero-side-note">
-            <span>01 — 04</span>
-            <span>Scroll to explore</span>
-          </div>
-        </div>
-      </section>
+    <div className="hero-side-note">
+      <span>01 — 04</span>
+      <span>Scroll to explore</span>
+    </div>
+  </div>
+</section>
 
       <section className="intro-strip">
         <div className="container intro-grid">
           <div className="intro-number">01</div>
 
           <p className="intro-statement">
-            Construction is more than putting up walls. It is about creating
-            places that remain useful long after the work is finished.
+            From architectural design and building construction to concrete flooring, landscaping, interlocking paving and modern Tyrolean finishes, J-STONES handles the work from planning through execution.
+
           </p>
 
           <div className="intro-rule" />
         </div>
       </section>
 
-      <section className="section about-section" id="about">
-        <div className="container about-grid">
-          <div className="section-heading reveal" data-reveal>
-            <span className="section-number">02 / About</span>
+     <section className="section about-section" id="about">
+  <div className="container about-grid">
+    <div className="section-heading reveal" data-reveal>
+      <span className="section-number">02 / About</span>
 
-            <h2>
-              We build with
-              <em> context.</em>
-            </h2>
+      <h2>
+        Built around
+        <em> the work.</em>
+      </h2>
+    </div>
+
+    <div className="about-content">
+      <p className="large-copy reveal" data-reveal>
+        From the first design to the final finish, J-STONES takes on the
+        practical work required to bring a project together.
+      </p>
+
+      <p className="body-copy reveal" data-reveal>
+        We provide architectural design, building construction, project
+        management, concrete flooring, landscaping, interlocking paving,
+        modern Tyrolean finishes and managerial consultancy.
+      </p>
+
+      <a
+        className="text-link reveal"
+        data-reveal
+        href="#services"
+      >
+        Explore our services
+        <span>→</span>
+      </a>
+    </div>
+  </div>
+
+  <div className="container about-image-wrap reveal" data-reveal>
+    <img 
+  src={constructionImage} 
+  alt="J-STONES construction work" 
+/>
+
+    <div className="image-caption">
+      <span>J-STONES Construction</span>
+      <span>Design / Construction / Finishing</span>
+    </div>
+  </div>
+</section>
+
+<section className="section projects-section" id="projects">
+  <div className="container">
+    <div className="section-top reveal" data-reveal>
+      <div>
+        <span className="section-number">03 / Projects</span>
+
+        <h2>
+          See what we've
+          <em> built.</em>
+        </h2>
+      </div>
+
+      <p>
+        A look at selected J-STONES projects, from construction and
+        finishing works to completed developments.
+      </p>
+    </div>
+
+    {projectsLoading ? (
+      <div
+        className="projects-loading reveal is-visible"
+        data-reveal
+      >
+        <div className="projects-loading-line" />
+        <span>Loading projects</span>
+      </div>
+    ) : projects.length === 0 ? (
+      <div className="projects-placeholder reveal" data-reveal>
+        <div className="projects-placeholder-image">
+          <img
+            src={images.workers}
+            alt="Construction workers on site in Nigeria"
+          />
+
+          <div className="projects-placeholder-image-label">
+            <span>03</span>
+            <span>Work in progress</span>
+          </div>
+        </div>
+
+        <div className="projects-placeholder-content">
+          <div>
+            <span className="projects-placeholder-kicker">
+              Our work
+            </span>
+
+            <h3>
+              Projects take
+              <em> shape here.</em>
+            </h3>
+
+            <p>
+              This is where we document selected projects and completed
+              works as they are added to the J-STONES portfolio.
+            </p>
           </div>
 
-          <div className="about-content">
-            <p className="large-copy reveal" data-reveal>
-              Nigerian cities are changing quickly. The buildings we create
-              should respond to that reality — not copy somewhere else.
-            </p>
+          <div className="projects-placeholder-footer">
+            <span>
+              Construction / Finishing / External Works
+            </span>
 
-            <p className="body-copy reveal" data-reveal>
-              Nasal Holdings Limited brings together construction, property
-              development, design and investment under one direction. Our
-              approach is straightforward: understand the site, understand the
-              people and build something that makes sense.
-            </p>
-
-            <a
-              className="text-link reveal"
-              data-reveal
-              href="#services"
-            >
-              What we do
+            <a className="text-link" href="#contact">
+              Discuss a project
               <span>→</span>
             </a>
           </div>
         </div>
-
-        <div className="container about-image-wrap reveal" data-reveal>
-          <img
-            src={images.construction}
-            alt="Building construction in Abuja, Nigeria"
-          />
-
-          <div className="image-caption">
-            <span>Construction in Nigeria</span>
-            <span>Site / Structure / Progress</span>
-          </div>
-        </div>
-      </section>
-
-      <section className="section projects-section" id="projects">
-        <div className="container">
-          <div className="section-top reveal" data-reveal>
-            <div>
-              <span className="section-number">03 / Projects</span>
-
-              <h2>
-                Work worth
-                <em> showing.</em>
-              </h2>
-            </div>
-
-            <p>
-              {projects.length > 0
-                ? 'A selection of completed and approved Nasal Holdings projects.'
-                : 'Places we have built, developed and continue to build are documented here.'}
-            </p>
-          </div>
-
-          {projectsLoading ? (
-            <div
-              className="projects-loading reveal is-visible"
-              data-reveal
-            >
-              <div className="projects-loading-line" />
-              <span>Loading projects</span>
-            </div>
-          ) : projects.length === 0 ? (
-            <div className="projects-placeholder reveal" data-reveal>
-              <div className="projects-placeholder-image">
+      </div>
+    ) : (
+      <div className="projects-grid">
+        {projects.map((project, index) => (
+          <article
+            className="project-card reveal"
+            data-reveal
+            key={project.id}
+            style={{
+              transitionDelay: `${index * 70}ms`,
+            }}
+          >
+            <div className="project-card-image">
+              {project.image_url ? (
+                <img
+                  src={project.image_url}
+                  alt={project.title}
+                />
+              ) : (
                 <img
                   src={images.workers}
-                  alt="Construction workers building on site in Nigeria"
+                  alt="Construction workers on site in Nigeria"
                 />
+              )}
 
-                <div className="projects-placeholder-image-label">
-                  <span>03</span>
-                  <span>Work in progress</span>
-                </div>
+              <span className="project-card-number">
+                {String(index + 1).padStart(2, '0')}
+              </span>
+            </div>
+
+            <div className="project-card-content">
+              <div className="project-card-meta">
+                <span>{project.category || 'Project'}</span>
+                <span>
+                  {project.location || 'Nigeria'}
+                </span>
               </div>
 
-              <div className="projects-placeholder-content">
-                <div>
-                  <span className="projects-placeholder-kicker">
-                    Our work
-                  </span>
+              <h3>{project.title}</h3>
 
-                  <h3>
-                    Projects take
-                    <em> shape here.</em>
-                  </h3>
+              {project.description && (
+                <p>{project.description}</p>
+              )}
 
-                  <p>
-                    As Nasal Holdings completes and approves projects, this
-                    collection will become a record of the places we have built
-                    and developed across Nigeria.
-                  </p>
-                </div>
-
-                <div className="projects-placeholder-footer">
-                  <span>
-                    Construction / Development / Property
-                  </span>
-
-                  <a className="text-link" href="#contact">
-                    Discuss a project
-                    <span>→</span>
-                  </a>
-                </div>
-              </div>
+              {project.completed_at && (
+                <span className="project-card-date">
+                  Completed{' '}
+                  {new Date(
+                    `${project.completed_at}T00:00:00`,
+                  ).toLocaleDateString('en-NG', {
+                    month: 'long',
+                    year: 'numeric',
+                  })}
+                </span>
+              )}
             </div>
-          ) : (
-            <div className="projects-grid">
-              {projects.map((project, index) => (
-                <article
-                  className="project-card reveal"
-                  data-reveal
-                  key={project.id}
-                  style={{
-                    transitionDelay: `${index * 70}ms`,
-                  }}
-                >
-                  <div className="project-card-image">
-                    {project.image_url ? (
-                      <img
-                        src={project.image_url}
-                        alt={project.title}
-                      />
-                    ) : (
-                      <img
-                        src={images.workers}
-                        alt="Construction workers on site in Nigeria"
-                      />
-                    )}
-
-                    <span className="project-card-number">
-                      {String(index + 1).padStart(2, '0')}
-                    </span>
-                  </div>
-
-                  <div className="project-card-content">
-                    <div className="project-card-meta">
-                      <span>{project.category || 'Project'}</span>
-                      <span>
-                        {project.location || 'Nigeria'}
-                      </span>
-                    </div>
-
-                    <h3>{project.title}</h3>
-
-                    {project.description && (
-                      <p>{project.description}</p>
-                    )}
-
-                    {project.completed_at && (
-                      <span className="project-card-date">
-                        Completed{' '}
-                        {new Date(
-                          `${project.completed_at}T00:00:00`,
-                        ).toLocaleDateString('en-NG', {
-                          month: 'long',
-                          year: 'numeric',
-                        })}
-                      </span>
-                    )}
-                  </div>
-                </article>
-              ))}
-            </div>
-          )}
-        </div>
-      </section>
+          </article>
+        ))}
+      </div>
+    )}
+  </div>
+</section>
 
       <section className="services-section" id="services">
         <div className="container">
@@ -480,10 +489,13 @@ export default function Home() {
                 04 / Services
               </span>
 
-              <h2>
-                From ground
-                <em> to completion.</em>
-              </h2>
+              
+<h2>
+  Built with
+  <em> purpose.</em>
+</h2>
+
+
             </div>
 
             <p>
@@ -524,15 +536,12 @@ export default function Home() {
         >
           <span className="section-number">05 / Approach</span>
 
-          <h2>
-            Good buildings start with
-            <em> good thinking.</em>
-          </h2>
+         <h2> We plan it. <em> We build it.</em> </h2>
 
           <p>
-            We look at the land, the people, the purpose and the future before
-            thinking about the finished building.
-          </p>
+  From architectural design and project management to construction and finishing, we approach every project with careful planning, skilled execution and attention to detail.
+</p>
+
         </div>
       </section>
 
@@ -588,153 +597,189 @@ export default function Home() {
       </section>
 
       <section className="contact-section" id="contact">
-        <div className="container contact-grid">
-          <div className="contact-copy reveal" data-reveal>
-            <span className="section-number light-number">
-              07 / Contact
-            </span>
+  <div className="container contact-grid">
+    <div className="contact-copy reveal" data-reveal>
+      <span className="section-number light-number">
+        07 / Contact
+      </span>
 
-            <h2>
-              Have something
-              <em> in mind?</em>
-            </h2>
 
-            <p>
-              Tell us what you are building, developing or considering. Start
-              with the basics and we can take it from there.
-            </p>
+  <h2>
+    Have a project
+    <em> in mind?</em>
+  </h2>
 
-            <div className="contact-details">
-              <a href="tel:+2340000000000">
-                +234 000 000 0000
-              </a>
+  <p>
+    Whether you are planning a new build, improving an existing space or
+    looking for professional project support, tell us what you have in
+    mind and let’s discuss how J-STONES can help.
+  </p>
 
-              <a href="mailto:info@nasalholdings.com">
-                info@nasalholdings.com
-              </a>
+  <div className="contact-details">
+    <a href="tel:+2349040126658">
+      0904 012 6658
+    </a>
 
-              <span>Nigeria</span>
-            </div>
-          </div>
+    <a href="https://wa.me/2349067295196" target="_blank" rel="noreferrer">
+      WhatsApp: 0906 729 5196
+    </a>
 
-          <div className="contact-form-wrap reveal" data-reveal>
-            {submitted ? (
-              <div className="form-success">
-                <span>✓</span>
+    <a href="mailto:jstonesconstructioncompanyltd1@gmail.com">
+      jstonesconstructioncompanyltd1@gmail.com
+    </a>
 
-                <h3>Thank you.</h3>
+    <span>
+      No. 72 Chief John Okafor Road, Okpanam, Asaba, Delta State, Nigeria
+    </span>
+  </div>
+</div>
 
-                <p>
-                  Your message has been received. We will get back to you.
-                </p>
+<div className="contact-form-wrap reveal" data-reveal>
+  {submitted ? (
+    <div className="form-success">
+      <span>✓</span>
 
-                <button
-                  type="button"
-                  onClick={() => setSubmitted(false)}
-                >
-                  Send another message
-                </button>
-              </div>
-            ) : (
-              <form
-                className="contact-form"
-                onSubmit={handleSubmit}
-              >
-                <label>
-                  <span>Name</span>
-                  <input type="text" name="name" required />
-                </label>
+      <h3>Thank you.</h3>
 
-                <label>
-                  <span>Email</span>
-                  <input type="email" name="email" required />
-                </label>
+      <p>
+        Your message has been received. We will get back to you.
+      </p>
 
-                <label>
-                  <span>Project type</span>
+      <button
+        type="button"
+        onClick={() => setSubmitted(false)}
+      >
+        Send another message
+      </button>
+    </div>
+  ) : (
+    <form
+      className="contact-form"
+      onSubmit={handleSubmit}
+    >
+      <label>
+        <span>Name</span>
+        <input type="text" name="name" required />
+      </label>
 
-                  <select
-                    name="projectType"
-                    defaultValue=""
-                  >
-                    <option value="" disabled>
-                      Select one
-                    </option>
+      <label>
+        <span>Email</span>
+        <input type="email" name="email" required />
+      </label>
 
-                    <option value="construction">
-                      Construction
-                    </option>
+      <label>
+        <span>Service</span>
 
-                    <option value="development">
-                      Property development
-                    </option>
+        <select
+          name="projectType"
+          defaultValue=""
+        >
+          <option value="" disabled>
+            Select a service
+          </option>
 
-                    <option value="design">
-                      Architectural design
-                    </option>
+          <option value="architectural-design">
+            Architectural Designs
+          </option>
 
-                    <option value="investment">
-                      Property investment
-                    </option>
+          <option value="project-management">
+            Project Management
+          </option>
 
-                    <option value="other">Other</option>
-                  </select>
-                </label>
+          <option value="building-construction">
+            Building Construction
+          </option>
 
-                <label>
-                  <span>Tell us about it</span>
+          <option value="concrete-floor-concepts">
+            Concrete Floor Concepts
+          </option>
 
-                  <textarea
-                    name="message"
-                    rows={5}
-                    required
-                  />
-                </label>
+          <option value="landscaping">
+            Landscaping
+          </option>
 
-                <button
-                  className="form-submit"
-                  type="submit"
-                >
-                  Send enquiry
-                  <span>→</span>
-                </button>
-              </form>
-            )}
-          </div>
-        </div>
-      </section>
+          <option value="interlocking-paving">
+            Interlocking Paving Stones
+          </option>
+
+          <option value="modern-tyrolean">
+            Modern Tyrolean
+          </option>
+
+          <option value="managerial-consultancy">
+            Managerial Consultancy
+          </option>
+
+          <option value="other">
+            Other
+          </option>
+        </select>
+      </label>
+
+      <label>
+        <span>Tell us about it</span>
+
+        <textarea
+          name="message"
+          rows={5}
+          required
+        />
+      </label>
+
+      <button
+        className="form-submit"
+        type="submit"
+      >
+        Send enquiry
+        <span>→</span>
+      </button>
+    </form>
+  )}
+</div>
+
+
+  </div>
+</section>
+
 
       <footer className="site-footer">
-        <div className="container footer-top">
-          <div className="footer-brand">
-            <img
-              className="nhl-logo"
-              src={logo}
-              alt="Nasal Holdings Limited"
-            />
+  <div className="container footer-top">
+    <div className="footer-brand">
+      <img
+        className="nhl-logo"
+        src={logo}
+        alt="J-STONES Construction Company Limited"
+      />
 
-            <div>
-              <strong>NASAL HOLDINGS LIMITED</strong>
-              <span>
-                Property • Construction • Development
-              </span>
-            </div>
-          </div>
 
-          <div className="footer-links">
-            <a href="#home">Back to top ↑</a>
-            <Link to="/admin">Admin</Link>
-          </div>
-        </div>
+  <div>
+    <strong>J-STONES CONSTRUCTION COMPANY LIMITED</strong>
+    <span>
+      Design • Construction • Finishing
+    </span>
+  </div>
+</div>
 
-        <div className="container footer-bottom">
-          <span>
-            © {new Date().getFullYear()} Nasal Holdings Limited
-          </span>
+<div className="footer-links">
+  <a href="#home">Back to top ↑</a>
+  <Link to="/admin">Admin</Link>
+</div>
 
-          <span>Built in Nigeria</span>
-        </div>
-      </footer>
+
+  </div>
+
+  <div className="container footer-bottom">
+    <span>
+      © {new Date().getFullYear()} J-STONES Construction Company Limited
+    </span>
+
+
+<span>Built in Nigeria</span>
+
+
+  </div>
+</footer>
+
     </main>
   )
 }

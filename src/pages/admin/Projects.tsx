@@ -25,9 +25,12 @@ export default function AdminProjects() {
     const { data, error } = await supabase
       .from('projects')
       .select(
-        'id, title, location, category, completed_at, image_url, published'
+        'id, title, location, category, completed_at, image_url, published',
       )
-      .order('completed_at', { ascending: false, nullsFirst: false })
+      .order('completed_at', {
+        ascending: false,
+        nullsFirst: false,
+      })
       .order('created_at', { ascending: false })
 
     if (error) {
@@ -64,14 +67,14 @@ export default function AdminProjects() {
       current.map(item =>
         item.id === project.id
           ? { ...item, published: !item.published }
-          : item
-      )
+          : item,
+      ),
     )
   }
 
   async function deleteProject(id: string) {
     const confirmed = window.confirm(
-      'Delete this project permanently?'
+      'Delete this project permanently?',
     )
 
     if (!confirmed) return
@@ -88,30 +91,47 @@ export default function AdminProjects() {
     }
 
     setProjects(current =>
-      current.filter(project => project.id !== id)
+      current.filter(project => project.id !== id),
     )
   }
 
   return (
     <AdminLayout>
+      {/* Header */}
       <div
         style={{
           display: 'flex',
           justifyContent: 'space-between',
-          alignItems: 'center',
+          alignItems: 'flex-end',
           gap: '1rem',
           marginBottom: '2rem',
           flexWrap: 'wrap',
         }}
       >
         <div>
+          <span
+            style={{
+              display: 'block',
+              color: '#D97924',
+              fontSize: '0.62rem',
+              letterSpacing: '0.16em',
+              textTransform: 'uppercase',
+              fontWeight: 700,
+              marginBottom: '0.65rem',
+            }}
+          >
+            J-STONES / Projects
+          </span>
+
           <h1
             style={{
-              fontFamily: "'Fraunces', serif",
+              fontFamily: "'Instrument Serif', Georgia, serif",
               fontWeight: 400,
-              fontSize: '1.8rem',
-              color: '#f2ede6',
+              fontSize: 'clamp(2rem, 4vw, 2.8rem)',
+              color: '#101820',
+              lineHeight: 1,
               margin: 0,
+              letterSpacing: '-0.03em',
             }}
           >
             Projects
@@ -119,69 +139,92 @@ export default function AdminProjects() {
 
           <p
             style={{
-              color: '#8a8489',
-              fontSize: '0.8rem',
-              marginTop: '0.4rem',
+              color: '#66717C',
+              fontSize: '0.75rem',
+              marginTop: '0.55rem',
             }}
           >
-            Manage the projects displayed on the website.
+            Manage the projects displayed on the J-STONES website.
           </p>
         </div>
 
         <Link
           to="/admin/projects/new"
           style={{
-            background: '#c49a26',
-            color: '#09080a',
+            background: '#0B3768',
+            color: '#FFFFFF',
             padding: '0.75rem 1rem',
             textDecoration: 'none',
-            fontSize: '0.8rem',
-            fontWeight: 600,
+            fontSize: '0.7rem',
+            fontWeight: 700,
+            letterSpacing: '0.04em',
           }}
         >
           + Add Project
         </Link>
       </div>
 
+      {/* Error */}
       {error && (
         <div
           style={{
-            border: '1px solid #7f1d1d',
-            background: '#1a0d0d',
-            color: '#f87171',
+            border: '1px solid #E2BABA',
+            background: '#F9EEEE',
+            color: '#9B3434',
             padding: '0.9rem 1rem',
             marginBottom: '1.25rem',
-            fontSize: '0.8rem',
+            fontSize: '0.78rem',
+            lineHeight: 1.5,
           }}
         >
           {error}
         </div>
       )}
 
+      {/* Loading */}
       {loading ? (
-        <p
+        <div
           style={{
-            color: '#8a8489',
-            fontSize: '0.85rem',
+            background: '#FFFFFF',
+            border: '1px solid #C7CED6',
+            padding: '3rem 1.5rem',
+            textAlign: 'center',
+            color: '#66717C',
+            fontSize: '0.8rem',
           }}
         >
           Loading projects…
-        </p>
+        </div>
       ) : projects.length === 0 ? (
+        /* Empty state */
         <div
           style={{
-            border: '1px solid #2a2630',
-            background: '#131113',
-            padding: '3rem 1.5rem',
+            background: '#FFFFFF',
+            border: '1px solid #C7CED6',
+            padding: '4rem 1.5rem',
             textAlign: 'center',
           }}
         >
+          <span
+            style={{
+              display: 'block',
+              color: '#D97924',
+              fontSize: '0.62rem',
+              letterSpacing: '0.16em',
+              textTransform: 'uppercase',
+              fontWeight: 700,
+              marginBottom: '0.7rem',
+            }}
+          >
+            Portfolio
+          </span>
+
           <p
             style={{
-              color: '#f2ede6',
+              color: '#101820',
               margin: 0,
-              fontFamily: "'Fraunces', serif",
-              fontSize: '1.3rem',
+              fontFamily: "'Instrument Serif', Georgia, serif",
+              fontSize: '1.7rem',
             }}
           >
             No projects yet.
@@ -189,26 +232,28 @@ export default function AdminProjects() {
 
           <p
             style={{
-              color: '#8a8489',
-              fontSize: '0.8rem',
-              margin: '0.6rem 0 1.25rem',
+              color: '#66717C',
+              fontSize: '0.76rem',
+              margin: '0.6rem 0 1.4rem',
             }}
           >
-            Add the first Nasal Holdings project.
+            Add the first J-STONES construction project.
           </p>
 
           <Link
             to="/admin/projects/new"
             style={{
-              color: '#c49a26',
+              color: '#0B3768',
               textDecoration: 'none',
-              fontSize: '0.8rem',
+              fontSize: '0.75rem',
+              fontWeight: 700,
             }}
           >
             Add project →
           </Link>
         </div>
       ) : (
+        /* Project list */
         <div
           style={{
             display: 'flex',
@@ -221,19 +266,21 @@ export default function AdminProjects() {
               key={project.id}
               style={{
                 display: 'grid',
-                gridTemplateColumns: '110px 1fr auto',
+                gridTemplateColumns:
+                  '120px minmax(0, 1fr) auto',
                 gap: '1.25rem',
                 alignItems: 'center',
-                background: '#131113',
-                border: '1px solid #2a2630',
+                background: '#FFFFFF',
+                border: '1px solid #C7CED6',
                 padding: '0.9rem',
               }}
             >
+              {/* Image */}
               <div
                 style={{
-                  width: 110,
-                  height: 75,
-                  background: '#09080a',
+                  width: 120,
+                  height: 82,
+                  background: '#E8EEF4',
                   overflow: 'hidden',
                 }}
               >
@@ -255,8 +302,10 @@ export default function AdminProjects() {
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      color: '#625e62',
-                      fontSize: '0.65rem',
+                      color: '#66717C',
+                      fontSize: '0.62rem',
+                      letterSpacing: '0.05em',
+                      textTransform: 'uppercase',
                     }}
                   >
                     No image
@@ -264,13 +313,19 @@ export default function AdminProjects() {
                 )}
               </div>
 
-              <div>
+              {/* Project information */}
+              <div
+                style={{
+                  minWidth: 0,
+                }}
+              >
                 <h2
                   style={{
-                    color: '#f2ede6',
+                    color: '#101820',
                     fontSize: '0.95rem',
-                    fontWeight: 500,
+                    fontWeight: 600,
                     margin: 0,
+                    lineHeight: 1.3,
                   }}
                 >
                   {project.title}
@@ -278,9 +333,10 @@ export default function AdminProjects() {
 
                 <p
                   style={{
-                    color: '#8a8489',
-                    fontSize: '0.72rem',
-                    margin: '0.35rem 0 0',
+                    color: '#66717C',
+                    fontSize: '0.7rem',
+                    margin: '0.4rem 0 0',
+                    lineHeight: 1.5,
                   }}
                 >
                   {project.location || 'No location'}
@@ -289,26 +345,54 @@ export default function AdminProjects() {
                     : ''}
                 </p>
 
+                {project.completed_at && (
+                  <p
+                    style={{
+                      color: '#89939D',
+                      fontSize: '0.64rem',
+                      margin: '0.3rem 0 0',
+                    }}
+                  >
+                    Completed{' '}
+                    {new Date(
+                      `${project.completed_at}T00:00:00`,
+                    ).getFullYear()}
+                  </p>
+                )}
+
                 <span
                   style={{
                     display: 'inline-block',
                     marginTop: '0.55rem',
-                    fontSize: '0.6rem',
+                    padding: '0.25rem 0.5rem',
+                    fontSize: '0.56rem',
                     letterSpacing: '0.1em',
                     textTransform: 'uppercase',
+                    fontWeight: 700,
                     color: project.published
-                      ? '#4ade80'
-                      : '#8a8489',
+                      ? '#176B3A'
+                      : '#66717C',
+                    backgroundColor: project.published
+                      ? '#E8F2EC'
+                      : '#F5F3EE',
+                    border: `1px solid ${
+                      project.published
+                        ? '#B8D8C3'
+                        : '#D9DEE3'
+                    }`,
                   }}
                 >
-                  {project.published ? 'Published' : 'Draft'}
+                  {project.published
+                    ? 'Published'
+                    : 'Draft'}
                 </span>
               </div>
 
+              {/* Actions */}
               <div
                 style={{
                   display: 'flex',
-                  gap: '0.5rem',
+                  gap: '0.45rem',
                   alignItems: 'center',
                   flexWrap: 'wrap',
                   justifyContent: 'flex-end',
@@ -317,11 +401,13 @@ export default function AdminProjects() {
                 <Link
                   to={`/admin/projects/${project.id}/preview`}
                   style={{
-                    border: '1px solid #2a2630',
-                    color: '#8a8489',
-                    padding: '0.55rem 0.75rem',
+                    border: '1px solid #C7CED6',
+                    color: '#66717C',
+                    background: '#FFFFFF',
+                    padding: '0.55rem 0.7rem',
                     textDecoration: 'none',
-                    fontSize: '0.7rem',
+                    fontSize: '0.66rem',
+                    fontWeight: 600,
                   }}
                 >
                   Preview
@@ -330,11 +416,13 @@ export default function AdminProjects() {
                 <Link
                   to={`/admin/projects/${project.id}/edit`}
                   style={{
-                    border: '1px solid #2a2630',
-                    color: '#f2ede6',
-                    padding: '0.55rem 0.75rem',
+                    border: '1px solid #C7CED6',
+                    color: '#101820',
+                    background: '#FFFFFF',
+                    padding: '0.55rem 0.7rem',
                     textDecoration: 'none',
-                    fontSize: '0.7rem',
+                    fontSize: '0.66rem',
+                    fontWeight: 600,
                   }}
                 >
                   Edit
@@ -343,26 +431,34 @@ export default function AdminProjects() {
                 <button
                   onClick={() => togglePublished(project)}
                   style={{
-                    border: '1px solid #2a2630',
-                    background: 'transparent',
-                    color: '#c49a26',
-                    padding: '0.55rem 0.75rem',
+                    border: '1px solid #B7C5D3',
+                    background: '#F2F6FA',
+                    color: '#0B3768',
+                    padding: '0.55rem 0.7rem',
                     cursor: 'pointer',
-                    fontSize: '0.7rem',
+                    fontSize: '0.66rem',
+                    fontWeight: 700,
+                    fontFamily: "'DM Sans', sans-serif",
                   }}
                 >
-                  {project.published ? 'Unpublish' : 'Publish'}
+                  {project.published
+                    ? 'Unpublish'
+                    : 'Publish'}
                 </button>
 
                 <button
-                  onClick={() => deleteProject(project.id)}
+                  onClick={() =>
+                    deleteProject(project.id)
+                  }
                   style={{
-                    border: '1px solid #2a2630',
-                    background: 'transparent',
-                    color: '#f87171',
-                    padding: '0.55rem 0.75rem',
+                    border: '1px solid #E2BABA',
+                    background: '#FFFFFF',
+                    color: '#9B3434',
+                    padding: '0.55rem 0.7rem',
                     cursor: 'pointer',
-                    fontSize: '0.7rem',
+                    fontSize: '0.66rem',
+                    fontWeight: 700,
+                    fontFamily: "'DM Sans', sans-serif",
                   }}
                 >
                   Delete

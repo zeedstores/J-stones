@@ -2,28 +2,32 @@
 @import 'tailwindcss';
 
 @theme {
-  --color-background: #f3f0e8;
-  --color-foreground: #171a17;
-  --color-card: #e8e4da;
-  --color-primary: #27372f;
-  --color-secondary: #d7d1c6;
-  --color-accent: #a55c3b;
-  --color-border: #c8c1b5;
+  --color-background: #F5F3EE;
+  --color-foreground: #101820;
+  --color-card: #E8EEF4;
+  --color-primary: #0B3768;
+  --color-secondary: #D7DDE3;
+  --color-accent: #D97924;
+  --color-border: #C7CED6;
   --font-display: 'Instrument Serif', Georgia, serif;
   --font-body: 'DM Sans', system-ui, sans-serif;
 }
-
 :root {
-  --paper: #f3f0e8;
-  --paper-dark: #e8e4da;
-  --ink: #171a17;
-  --olive: #27372f;
-  --olive-light: #3d5046;
-  --clay: #a55c3b;
-  --stone: #d7d1c6;
-  --line: #c8c1b5;
-  --muted: #6b6b63;
-  --white: #faf9f5;
+  --paper: #F5F3EE;
+  --paper-dark: #E8EEF4;
+
+  --ink: #101820;
+
+  --olive: #1e1e20;
+  --olive-light: #174A7F;
+
+  --clay: #D97924;
+
+  --stone: #D7DDE3;
+  --line: #C7CED6;
+
+  --muted: #66717C;
+  --white: #FFFFFF;
 }
 
 * {
@@ -122,7 +126,7 @@ img {
 .brand {
   display: flex;
   align-items: center;
-  gap: 12px;
+  
 }
 
 .nhl-logo {
@@ -135,9 +139,7 @@ img {
   transition: filter 0.3s ease;
 }
 
-.nhl-logo.is-dark {
-  filter: brightness(0);
-}
+
 
 .brand-name {
   font-size: 12px;
@@ -217,12 +219,11 @@ img {
   font-size: 20px;
 }
 
-/* ---------------- HERO ---------------- */
-
 .hero {
+  position: relative;
   min-height: 100svh;
   display: grid;
-  grid-template-columns: 48% 52%;
+  grid-template-columns: 46% 54%;
   background: var(--olive);
   color: var(--white);
 }
@@ -231,7 +232,7 @@ img {
   position: relative;
   z-index: 2;
   min-height: 100svh;
-  padding: 160px 7vw 70px;
+  padding: 150px 6vw 70px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -241,7 +242,7 @@ img {
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-bottom: 30px;
+  margin-bottom: 34px;
   font-size: 10px;
   font-weight: 600;
   letter-spacing: 0.18em;
@@ -249,22 +250,22 @@ img {
 }
 
 .eyebrow-line {
-  width: 34px;
-  height: 1px;
+  width: 38px;
+  height: 2px;
   background: var(--clay);
 }
 
 .hero-title {
-  max-width: 720px;
+  max-width: 700px;
   margin: 0;
-  font-size: clamp(64px, 7.3vw, 120px);
+  font-size: clamp(68px, 7.5vw, 122px);
   font-weight: 400;
-  line-height: 0.87;
-  letter-spacing: -0.045em;
+  line-height: 0.84;
+  letter-spacing: -0.055em;
 }
 
 .hero-title em {
-  color: #d9b7a5;
+  color: var(--clay);
   font-family: var(--font-display);
   font-weight: 400;
 }
@@ -274,15 +275,15 @@ img {
 }
 
 .hero-description {
-  max-width: 500px;
-  margin: 40px 0 0;
+  max-width: 470px;
+  margin: 42px 0 0;
   color: rgba(250, 249, 245, 0.72);
-  font-size: 15px;
-  line-height: 1.8;
+  font-size: 14px;
+  line-height: 1.85;
 }
 
 .hero-actions {
-  margin-top: 35px;
+  margin-top: 34px;
   display: flex;
   align-items: center;
   gap: 28px;
@@ -328,28 +329,10 @@ img {
   transform: translateX(5px);
 }
 
-.hero-location {
-  margin-top: auto;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  color: rgba(250, 249, 245, 0.55);
-  font-size: 9px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.location-dot {
-  width: 4px;
-  height: 4px;
-  background: var(--clay);
-  border-radius: 50%;
-}
-
 .hero-visual {
   position: relative;
   min-height: 100svh;
-  padding: 100px 50px 50px 0;
+  padding: 100px 40px 40px 0;
   display: flex;
   align-items: stretch;
 }
@@ -364,17 +347,20 @@ img {
   position: absolute;
   content: '';
   inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(15, 20, 17, 0.05),
-    rgba(15, 20, 17, 0.3)
-  );
+  background:
+    linear-gradient(
+      180deg,
+      rgba(16, 24, 32, 0.02),
+      rgba(16, 24, 32, 0.42)
+    );
+  pointer-events: none;
 }
 
 .hero-image-wrap img {
+  
   height: 100%;
   object-fit: cover;
-  filter: saturate(0.82);
+  filter: saturate(0.88) contrast(1.04);
   transform: scale(1.04);
   animation: hero-image-in 1.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
@@ -382,22 +368,61 @@ img {
 .hero-image-label {
   position: absolute;
   z-index: 2;
-  left: 25px;
+  left: 5px;
+  right: 5px;
   bottom: 25px;
-  right: 25px;
+
   display: flex;
+  align-items: flex-end;
   justify-content: space-between;
+  gap: 20px;
+
   color: var(--white);
+}
+
+.ambassador-tag {
+  background: #D97924;
+  color: #101820;
+  padding: 8px 11px;
+
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ambassador-name {
+  background: rgba(16, 24, 32, 0.9);
+  padding: 9px 9px;
+  .ambassador-name {
+  white-space: nowrap;
+}
+  font-size: 10px;
+  font-weight: 900;
+  line-height: 1.25;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-align: right;
+}
+
+.ambassador-name small {
+  display: block;
+  margin-top: 3px;
+
   font-size: 9px;
   font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.75;
+}
+
+.hero-image-label span {
+  padding: 9px 12px;
 }
 
 .hero-side-note {
   position: absolute;
-  right: 13px;
-  bottom: 55px;
+  right: 12px;
+  bottom: 50px;
   display: flex;
   flex-direction: column;
   gap: 15px;
