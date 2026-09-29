@@ -135,13 +135,13 @@ export default function ProjectForm({ mode }: { mode: 'new' | 'edit' }) {
   }
 
   async function handleSave(publish: boolean) {
-    if (!form.title.trim()) {
-      setMessage('Project name is required.')
-      return
-    }
+  if (!coverFile && !existingImageUrl) {
+    setMessage('Project cover image is required.')
+    return
+  }
 
-    setSaving(true)
-    setMessage('')
+  setSaving(true)
+  setMessage('')
 
     try {
       const imageUrl = await uploadCoverImage()
