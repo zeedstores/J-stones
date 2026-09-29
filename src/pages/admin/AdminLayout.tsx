@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import logo from '../../imports/logo.png'
 
-const ADMIN_SESSION_KEY = 'nasal_admin_logged_in'
+const ADMIN_SESSION_KEY = 'jstones_admin_logged_in'
 
 const navItems = [
 { label: 'Overview', path: '/admin' },
