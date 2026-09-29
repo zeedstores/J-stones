@@ -1584,3 +1584,54 @@ img {
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
+
+/* ---------------- PROJECTS — MOBILE ---------------- */
+
+@media (max-width: 768px) {
+
+  /* Projects heading + intro text */
+  .projects-section .section-top {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    margin-bottom: 40px;
+    align-items: start;
+  }
+
+  .projects-section .section-top > p {
+    max-width: 100%;
+    font-size: 12px;
+    line-height: 1.65;
+  }
+
+  /* Project cards */
+  .projects-section .projects-grid {
+    grid-template-columns: 1fr;
+    row-gap: 45px;
+  }
+
+  /* Card content */
+  .projects-section .project-card-content {
+    padding-top: 16px;
+  }
+
+  .projects-section .project-card-meta {
+    padding-bottom: 10px;
+  }
+
+  .projects-section .project-card-content h3 {
+    margin-top: 15px;
+    font-size: 28px;
+    line-height: 1.05;
+  }
+
+  .projects-section .project-card-content p {
+    margin-top: 12px;
+    font-size: 12px;
+    line-height: 1.65;
+  }
+
+  .projects-section .project-card-date {
+    margin-top: 14px;
+  }
+
+}
