@@ -811,13 +811,16 @@ ${message}`
     © {new Date().getFullYear()} J-STONES Construction Company Limited
   </span>
 
-  <a
-    href="https://wa.me/2347039312869?text=Hello%20OctaDevs%2C%20I%20found%20your%20work%20on%20the%20J-STONES%20website%20and%20would%20like%20to%20discuss%20a%20website%20project."
-    target="_blank"
-    rel="noreferrer"
-  >
-    Built by OctaDevs
-  </a>
+  
+<a
+  className="footer-credit"
+  href="https://wa.me/2347039312869?text=Hello%20OctaDevs%2C%20I%20found%20your%20work%20on%20the%20J-STONES%20website%20and%20would%20like%20to%20discuss%20a%20website%20project."
+  target="_blank"
+  rel="noreferrer"
+>
+  Built by OctaDevs <span>↗</span>
+</a>
+
 </div>
 
       </footer>
