@@ -6,9 +6,8 @@ import logo from '../imports/logo.png'
 import heroImage from '../imports/hero-image.png'
 import constructionImage from '../imports/image-construction.jpg'
 
-
 const images = {
- hero: heroImage,
+  hero: heroImage,
 
   construction:
     'https://upload.wikimedia.org/wikipedia/commons/f/f4/Building_construction_in_Abuja_01.jpg',
@@ -19,75 +18,83 @@ const images = {
 
 const services = [
   {
-  number: '01',
-  title: 'Architectural Designs',
-  text: 'Architectural planning and design for residential and commercial projects.',
-},
+    number: '01',
+    title: 'Architectural Designs',
+    text: 'Architectural planning and design for residential and commercial projects.',
+  },
+
   {
-  number: '02',
-  title: 'Project Management',
-  text: 'Professional coordination and management of construction projects.',
-},
+    number: '02',
+    title: 'Project Management',
+    text: 'Professional coordination and management of construction projects.',
+  },
 
-{
-  number: '03',
-  title: 'Building Construction',
-  text: 'Building construction from foundation through completion.',
-},
+  {
+    number: '03',
+    title: 'Building Construction',
+    text: 'Building construction from foundation through completion.',
+  },
 
-{
-  number: '04',
-  title: 'Concrete Floor Concepts',
-  text: 'Durable concrete flooring solutions and finishes.',
-},
+  {
+    number: '04',
+    title: 'Concrete Floor Concepts',
+    text: 'Durable concrete flooring solutions and finishes.',
+  },
 
-{
-  number: '05',
-  title: 'Landscaping',
-  text: 'Landscape design and finishing for outdoor spaces.',
-},
+  {
+    number: '05',
+    title: 'Landscaping',
+    text: 'Landscape design and finishing for outdoor spaces.',
+  },
 
-{
-  number: '06',
-  title: 'Interlocking Paving Stones',
-  text: 'Installation of interlocking paving for outdoor spaces.',
-},
-{
-  number: '07',
-  title: 'Modern Tyrolean',
-  text: 'Modern textured finishes for clean, durable exterior surfaces.',
-},
+  {
+    number: '06',
+    title: 'Interlocking Paving Stones',
+    text: 'Installation of interlocking paving for outdoor spaces.',
+  },
 
-{
-  number: '08',
-  title: 'Managerial Consultancy',
-  text: 'Professional consultancy for construction and project management.',
-},
+  {
+    number: '07',
+    title: 'Modern Tyrolean',
+    text: 'Modern textured finishes for clean, durable exterior surfaces.',
+  },
+
+  {
+    number: '08',
+    title: 'Managerial Consultancy',
+    text: 'Professional consultancy for construction and project management.',
+  },
 ]
 
 const faqs = [
-{
-question: 'What services does J-STONES provide?',
-answer:
-'We provide architectural designs, project management, building construction, concrete floor concepts, landscaping, interlocking paving stones, modern Tyrolean finishes and managerial consultancy.',
-},
-{
-question: 'What types of construction projects do you handle?',
-answer:
-'We handle construction and finishing projects based on the client’s requirements, scope, location and project objectives.',
-},
-{
-question: 'Can I discuss my project before making a commitment?',
-answer:
-'Yes. You can discuss your project with us first so we can understand your requirements, provide guidance and determine the appropriate next steps.',
-},
-{
-question: 'Do you work with individual property owners?',
-answer:
-'Yes. We work with individual property owners, businesses and other clients looking for professional construction, design, finishing or project management services.',
-},
-]
+  {
+    question: 'What services does J-STONES provide?',
 
+    answer:
+      'We provide architectural designs, project management, building construction, concrete floor concepts, landscaping, interlocking paving stones, modern Tyrolean finishes and managerial consultancy.',
+  },
+
+  {
+    question: 'What types of construction projects do you handle?',
+
+    answer:
+      'We handle construction and finishing projects based on the client’s requirements, scope, location and project objectives.',
+  },
+
+  {
+    question: 'Can I discuss my project before making a commitment?',
+
+    answer:
+      'Yes. You can discuss your project with us first so we can understand your requirements, provide guidance and determine the appropriate next steps.',
+  },
+
+  {
+    question: 'Do you work with individual property owners?',
+
+    answer:
+      'Yes. We work with individual property owners, businesses and other clients looking for professional construction, design, finishing or project management services.',
+  },
+]
 
 type Project = {
   id: string
@@ -167,7 +174,29 @@ export default function Home() {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    setSubmitted(true)
+
+    const form = event.currentTarget
+    const formData = new FormData(form)
+
+    const name = formData.get('name')?.toString().trim() || ''
+    const email = formData.get('email')?.toString().trim() || ''
+    const service = formData.get('projectType')?.toString().trim() || ''
+    const message = formData.get('message')?.toString().trim() || ''
+
+    const whatsappMessage = `Hello J-STONES Construction,
+
+My name is ${name}.
+Email: ${email}
+Service: ${service}
+
+Project details:
+${message}`
+
+    const whatsappUrl = `https://wa.me/2349067295196?text=${encodeURIComponent(
+      whatsappMessage,
+    )}`
+
+    window.open(whatsappUrl, '_blank')
   }
 
   return (
@@ -183,12 +212,12 @@ export default function Home() {
           onClick={() => setMenuOpen(false)}
         >
           <img
-  className={`nhl-logo ${scrolled ? 'is-dark' : ''}`}
-  src={logo}
-  alt="J-STONES Construction Company Limited"
-/>
+            className={`nhl-logo ${scrolled ? 'is-dark' : ''}`}
+            src={logo}
+            alt="J-STONES Construction Company Limited"
+          />
 
-<span className="brand-name">J-STONES CONSTRUCTION</span>
+          <span className="brand-name">J-STONES CONSTRUCTION</span>
         </a>
 
         <nav className="desktop-nav">
@@ -219,267 +248,272 @@ export default function Home() {
           <a href="#about" onClick={() => setMenuOpen(false)}>
             About
           </a>
+
           <a href="#projects" onClick={() => setMenuOpen(false)}>
             Projects
           </a>
+
           <a href="#services" onClick={() => setMenuOpen(false)}>
             Services
           </a>
+
           <a href="#faq" onClick={() => setMenuOpen(false)}>
             FAQ
           </a>
+
           <a href="#contact" onClick={() => setMenuOpen(false)}>
             Contact
           </a>
         </div>
       )}
 
-    <section className="hero" id="home">
-  <div className="hero-copy">
-    
-    <h1 className="hero-title">
-      <span className="hero-line hero-reveal hero-reveal-two">
-        We build
-      </span>
+      <section className="hero" id="home">
+        <div className="hero-copy">
+          <h1 className="hero-title">
+            <span className="hero-line hero-reveal hero-reveal-two">
+              We build
+            </span>
 
-      <span className="hero-line hero-reveal hero-reveal-three">
-        what <em>stands.</em>
-      </span>
-    </h1>
+            <span className="hero-line hero-reveal hero-reveal-three">
+              what <em>stands.</em>
+            </span>
+          </h1>
 
-    <p className="hero-description hero-reveal hero-reveal-four">
-      J-STONES Construction Company Limited delivers construction,
-      development and project management solutions built around quality,
-      precision and lasting value.
-    </p>
+          <p className="hero-description hero-reveal hero-reveal-four">
+            J-STONES Construction Company Limited delivers construction,
+            development and project management solutions built around quality,
+            precision and lasting value.
+          </p>
 
-    <div className="hero-actions hero-reveal hero-reveal-five">
-      <a className="button button-dark" href="#projects">
-        View our work
-        <span>↗</span>
-      </a>
+          <div className="hero-actions hero-reveal hero-reveal-five">
+            <a className="button button-dark" href="#projects">
+              View our work
+              <span>↗</span>
+            </a>
 
-      <a className="text-link" href="#contact">
-        Start a project
-        <span>→</span>
-      </a>
-    </div>
-  </div>
+            <a className="text-link" href="#contact">
+              Start a project
+              <span>→</span>
+            </a>
+          </div>
+        </div>
 
-  <div className="hero-visual hero-reveal hero-reveal-image">
-    <div className="hero-image-wrap">
-      <img
-        src={images.hero}
-        alt="J-STONES construction project in Nigeria"
-      />
+        <div className="hero-visual hero-reveal hero-reveal-image">
+          <div className="hero-image-wrap">
+            <img
+              src={images.hero}
+              alt="J-STONES construction project in Nigeria"
+            />
 
-<div className="hero-image-label">
-  <span className="ambassador-tag">BRAND AMBASSADOR</span>
+            <div className="hero-image-label">
+              <span className="ambassador-tag">BRAND AMBASSADOR</span>
 
-  <span className="ambassador-name">
-    Sir Comedian ONE ON ONE
-    <small>(Woman Leader)</small>
-  </span>
-</div>
-    </div>
+              <span className="ambassador-name">
+                Sir Comedian ONE ON ONE
+                <small>(Woman Leader)</small>
+              </span>
+            </div>
+          </div>
 
-    <div className="hero-side-note">
-      <span>01 — 04</span>
-      <span>Scroll to explore</span>
-    </div>
-  </div>
-</section>
+          <div className="hero-side-note">
+            <span>01 — 04</span>
+            <span>Scroll to explore</span>
+          </div>
+        </div>
+      </section>
 
       <section className="intro-strip">
         <div className="container intro-grid">
           <div className="intro-number">01</div>
 
           <p className="intro-statement">
-            From architectural design and building construction to concrete flooring, landscaping, interlocking paving and modern Tyrolean finishes, J-STONES handles the work from planning through execution.
-
+            From architectural design and building construction to concrete
+            flooring, landscaping, interlocking paving and modern Tyrolean
+            finishes, J-STONES handles the work from planning through execution.
           </p>
 
           <div className="intro-rule" />
         </div>
       </section>
 
-     <section className="section about-section" id="about">
-  <div className="container about-grid">
-    <div className="section-heading reveal" data-reveal>
-      <span className="section-number">02 / About</span>
+      <section className="section about-section" id="about">
+        <div className="container about-grid">
+          <div className="section-heading reveal" data-reveal>
+            <span className="section-number">02 / About</span>
 
-      <h2>
-        Built around
-        <em> the work.</em>
-      </h2>
-    </div>
-
-    <div className="about-content">
-      <p className="large-copy reveal" data-reveal>
-        From the first design to the final finish, J-STONES takes on the
-        practical work required to bring a project together.
-      </p>
-
-      <p className="body-copy reveal" data-reveal>
-        We provide architectural design, building construction, project
-        management, concrete flooring, landscaping, interlocking paving,
-        modern Tyrolean finishes and managerial consultancy.
-      </p>
-
-      <a
-        className="text-link reveal"
-        data-reveal
-        href="#services"
-      >
-        Explore our services
-        <span>→</span>
-      </a>
-    </div>
-  </div>
-
-  <div className="container about-image-wrap reveal" data-reveal>
-    <img 
-  src={constructionImage} 
-  alt="J-STONES construction work" 
-/>
-
-    <div className="image-caption">
-      <span>J-STONES Construction</span>
-      <span>Design / Construction / Finishing</span>
-    </div>
-  </div>
-</section>
-
-<section className="section projects-section" id="projects">
-  <div className="container">
-    <div className="section-top reveal" data-reveal>
-      <div>
-        <span className="section-number">03 / Projects</span>
-
-        <h2>
-          See what we've
-          <em> built.</em>
-        </h2>
-      </div>
-
-      <p>
-        A look at selected J-STONES projects, from construction and
-        finishing works to completed developments.
-      </p>
-    </div>
-
-    {projectsLoading ? (
-      <div
-        className="projects-loading reveal is-visible"
-        data-reveal
-      >
-        <div className="projects-loading-line" />
-        <span>Loading projects</span>
-      </div>
-    ) : projects.length === 0 ? (
-      <div className="projects-placeholder reveal" data-reveal>
-        <div className="projects-placeholder-image">
-          <img
-            src={images.workers}
-            alt="Construction workers on site in Nigeria"
-          />
-
-          <div className="projects-placeholder-image-label">
-            <span>03</span>
-            <span>Work in progress</span>
+            <h2>
+              Built around
+              <em> the work.</em>
+            </h2>
           </div>
-        </div>
 
-        <div className="projects-placeholder-content">
-          <div>
-            <span className="projects-placeholder-kicker">
-              Our work
-            </span>
-
-            <h3>
-              Projects take
-              <em> shape here.</em>
-            </h3>
-
-            <p>
-              This is where we document selected projects and completed
-              works as they are added to the J-STONES portfolio.
+          <div className="about-content">
+            <p className="large-copy reveal" data-reveal>
+              From the first design to the final finish, J-STONES takes on the
+              practical work required to bring a project together.
             </p>
-          </div>
 
-          <div className="projects-placeholder-footer">
-            <span>
-              Construction / Finishing / External Works
-            </span>
+            <p className="body-copy reveal" data-reveal>
+              We provide architectural design, building construction, project
+              management, concrete flooring, landscaping, interlocking paving,
+              modern Tyrolean finishes and managerial consultancy.
+            </p>
 
-            <a className="text-link" href="#contact">
-              Discuss a project
+            <a
+              className="text-link reveal"
+              data-reveal
+              href="#services"
+            >
+              Explore our services
               <span>→</span>
             </a>
           </div>
         </div>
-      </div>
-    ) : (
-      <div className="projects-grid">
-        {projects.map((project, index) => (
-          <article
-            className="project-card reveal"
-            data-reveal
-            key={project.id}
-            style={{
-              transitionDelay: `${index * 70}ms`,
-            }}
-          >
-            <div className="project-card-image">
-              {project.image_url ? (
-                <img
-                  src={project.image_url}
-                  alt={project.title}
-                />
-              ) : (
+
+        <div className="container about-image-wrap reveal" data-reveal>
+          <img
+            src={constructionImage}
+            alt="J-STONES construction work"
+          />
+
+          <div className="image-caption">
+            <span>J-STONES Construction</span>
+            <span>Design / Construction / Finishing</span>
+          </div>
+        </div>
+      </section>
+
+      <section className="section projects-section" id="projects">
+        <div className="container">
+          <div className="section-top reveal" data-reveal>
+            <div>
+              <span className="section-number">03 / Projects</span>
+
+              <h2>
+                See what we've
+                <em> built.</em>
+              </h2>
+            </div>
+
+            <p>
+              A look at selected J-STONES projects, from construction and
+              finishing works to completed developments.
+            </p>
+          </div>
+
+          {projectsLoading ? (
+            <div
+              className="projects-loading reveal is-visible"
+              data-reveal
+            >
+              <div className="projects-loading-line" />
+              <span>Loading projects</span>
+            </div>
+          ) : projects.length === 0 ? (
+            <div className="projects-placeholder reveal" data-reveal>
+              <div className="projects-placeholder-image">
                 <img
                   src={images.workers}
                   alt="Construction workers on site in Nigeria"
                 />
-              )}
 
-              <span className="project-card-number">
-                {String(index + 1).padStart(2, '0')}
-              </span>
-            </div>
-
-            <div className="project-card-content">
-              <div className="project-card-meta">
-                <span>{project.category || 'Project'}</span>
-                <span>
-                  {project.location || 'Nigeria'}
-                </span>
+                <div className="projects-placeholder-image-label">
+                  <span>03</span>
+                  <span>Work in progress</span>
+                </div>
               </div>
 
-              <h3>{project.title}</h3>
+              <div className="projects-placeholder-content">
+                <div>
+                  <span className="projects-placeholder-kicker">
+                    Our work
+                  </span>
 
-              {project.description && (
-                <p>{project.description}</p>
-              )}
+                  <h3>
+                    Projects take
+                    <em> shape here.</em>
+                  </h3>
 
-              {project.completed_at && (
-                <span className="project-card-date">
-                  Completed{' '}
-                  {new Date(
-                    `${project.completed_at}T00:00:00`,
-                  ).toLocaleDateString('en-NG', {
-                    month: 'long',
-                    year: 'numeric',
-                  })}
-                </span>
-              )}
+                  <p>
+                    This is where we document selected projects and completed
+                    works as they are added to the J-STONES portfolio.
+                  </p>
+                </div>
+
+                <div className="projects-placeholder-footer">
+                  <span>
+                    Construction / Finishing / External Works
+                  </span>
+
+                  <a className="text-link" href="#contact">
+                    Discuss a project
+                    <span>→</span>
+                  </a>
+                </div>
+              </div>
             </div>
-          </article>
-        ))}
-      </div>
-    )}
-  </div>
-</section>
+          ) : (
+            <div className="projects-grid">
+              {projects.map((project, index) => (
+                <article
+                  className="project-card reveal"
+                  data-reveal
+                  key={project.id}
+                  style={{
+                    transitionDelay: `${index * 70}ms`,
+                  }}
+                >
+                  <div className="project-card-image">
+                    {project.image_url ? (
+                      <img
+                        src={project.image_url}
+                        alt={project.title}
+                      />
+                    ) : (
+                      <img
+                        src={images.workers}
+                        alt="Construction workers on site in Nigeria"
+                      />
+                    )}
+
+                    <span className="project-card-number">
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                  </div>
+
+                  <div className="project-card-content">
+                    <div className="project-card-meta">
+                      <span>{project.category || 'Project'}</span>
+
+                      <span>
+                        {project.location || 'Nigeria'}
+                      </span>
+                    </div>
+
+                    <h3>{project.title}</h3>
+
+                    {project.description && (
+                      <p>{project.description}</p>
+                    )}
+
+                    {project.completed_at && (
+                      <span className="project-card-date">
+                        Completed{' '}
+                        {new Date(
+                          `${project.completed_at}T00:00:00`,
+                        ).toLocaleDateString('en-NG', {
+                          month: 'long',
+                          year: 'numeric',
+                        })}
+                      </span>
+                    )}
+                  </div>
+                </article>
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
 
       <section className="services-section" id="services">
         <div className="container">
@@ -489,13 +523,10 @@ export default function Home() {
                 04 / Services
               </span>
 
-              
-<h2>
-  Built with
-  <em> purpose.</em>
-</h2>
-
-
+              <h2>
+                Built with
+                <em> purpose.</em>
+              </h2>
             </div>
 
             <p>
@@ -536,12 +567,15 @@ export default function Home() {
         >
           <span className="section-number">05 / Approach</span>
 
-         <h2> We plan it. <em> We build it.</em> </h2>
+          <h2>
+            We plan it. <em> We build it.</em>
+          </h2>
 
           <p>
-  From architectural design and project management to construction and finishing, we approach every project with careful planning, skilled execution and attention to detail.
-</p>
-
+            From architectural design and project management to construction
+            and finishing, we approach every project with careful planning,
+            skilled execution and attention to detail.
+          </p>
         </div>
       </section>
 
@@ -597,190 +631,206 @@ export default function Home() {
       </section>
 
       <section className="contact-section" id="contact">
-  <div className="container contact-grid">
-    <div className="contact-copy reveal" data-reveal>
-      <span className="section-number light-number">
-        07 / Contact
-      </span>
+        <div className="container contact-grid">
+          <div className="contact-copy reveal" data-reveal>
+            <span className="section-number light-number">
+              07 / Contact
+            </span>
 
+            <h2>
+              Have a project
+              <em> in mind?</em>
+            </h2>
 
-  <h2>
-    Have a project
-    <em> in mind?</em>
-  </h2>
+            <p>
+              Whether you are planning a new build, improving an existing
+              space or looking for professional project support, tell us what
+              you have in mind and let’s discuss how J-STONES can help.
+            </p>
 
-  <p>
-    Whether you are planning a new build, improving an existing space or
-    looking for professional project support, tell us what you have in
-    mind and let’s discuss how J-STONES can help.
-  </p>
+            <div className="contact-details">
+              <a
+                href="https://wa.me/2349067295196?text=Hello%20J-STONES%20Construction%2C%20I%20would%20like%20to%20discuss%20a%20project%20with%20you."
+                target="_blank"
+                rel="noreferrer"
+              >
+                0904 012 6658
+              </a>
 
-  <div className="contact-details">
-    <a href="tel:+2349040126658">
-      0904 012 6658
-    </a>
+              <a
+                href="https://wa.me/2349067295196"
+                target="_blank"
+                rel="noreferrer"
+              >
+                WhatsApp: 0906 729 5196
+              </a>
 
-    <a href="https://wa.me/2349067295196" target="_blank" rel="noreferrer">
-      WhatsApp: 0906 729 5196
-    </a>
+              <a href="mailto:jstonesconstructioncompanyltd1@gmail.com">
+                jstonesconstructioncompanyltd1@gmail.com
+              </a>
 
-    <a href="mailto:jstonesconstructioncompanyltd1@gmail.com">
-      jstonesconstructioncompanyltd1@gmail.com
-    </a>
+              <span>
+                No. 72 Chief John Okafor Road, Okpanam, Asaba, Delta State,
+                Nigeria
+              </span>
+            </div>
+          </div>
 
-    <span>
-      No. 72 Chief John Okafor Road, Okpanam, Asaba, Delta State, Nigeria
-    </span>
-  </div>
-</div>
+          <div className="contact-form-wrap reveal" data-reveal>
+            {submitted ? (
+              <div className="form-success">
+                <span>✓</span>
 
-<div className="contact-form-wrap reveal" data-reveal>
-  {submitted ? (
-    <div className="form-success">
-      <span>✓</span>
+                <h3>Thank you.</h3>
 
-      <h3>Thank you.</h3>
+                <p>
+                  Your message has been received. We will get back to you.
+                </p>
 
-      <p>
-        Your message has been received. We will get back to you.
-      </p>
+                <button
+                  type="button"
+                  onClick={() => setSubmitted(false)}
+                >
+                  Send another message
+                </button>
+              </div>
+            ) : (
+              <form
+                className="contact-form"
+                onSubmit={handleSubmit}
+              >
+                <label>
+                  <span>Name</span>
+                  <input type="text" name="name" required />
+                </label>
 
-      <button
-        type="button"
-        onClick={() => setSubmitted(false)}
-      >
-        Send another message
-      </button>
-    </div>
-  ) : (
-    <form
-      className="contact-form"
-      onSubmit={handleSubmit}
-    >
-      <label>
-        <span>Name</span>
-        <input type="text" name="name" required />
-      </label>
+                <label>
+                  <span>Email</span>
+                  <input type="email" name="email" required />
+                </label>
 
-      <label>
-        <span>Email</span>
-        <input type="email" name="email" required />
-      </label>
+                <label>
+                  <span>Service</span>
 
-      <label>
-        <span>Service</span>
+                  <select
+                    name="projectType"
+                    defaultValue=""
+                  >
+                    <option value="" disabled>
+                      Select a service
+                    </option>
 
-        <select
-          name="projectType"
-          defaultValue=""
-        >
-          <option value="" disabled>
-            Select a service
-          </option>
+                    <option value="architectural-design">
+                      Architectural Designs
+                    </option>
 
-          <option value="architectural-design">
-            Architectural Designs
-          </option>
+                    <option value="project-management">
+                      Project Management
+                    </option>
 
-          <option value="project-management">
-            Project Management
-          </option>
+                    <option value="building-construction">
+                      Building Construction
+                    </option>
 
-          <option value="building-construction">
-            Building Construction
-          </option>
+                    <option value="concrete-floor-concepts">
+                      Concrete Floor Concepts
+                    </option>
 
-          <option value="concrete-floor-concepts">
-            Concrete Floor Concepts
-          </option>
+                    <option value="landscaping">
+                      Landscaping
+                    </option>
 
-          <option value="landscaping">
-            Landscaping
-          </option>
+                    <option value="interlocking-paving">
+                      Interlocking Paving Stones
+                    </option>
 
-          <option value="interlocking-paving">
-            Interlocking Paving Stones
-          </option>
+                    <option value="modern-tyrolean">
+                      Modern Tyrolean
+                    </option>
 
-          <option value="modern-tyrolean">
-            Modern Tyrolean
-          </option>
+                    <option value="managerial-consultancy">
+                      Managerial Consultancy
+                    </option>
 
-          <option value="managerial-consultancy">
-            Managerial Consultancy
-          </option>
+                    <option value="other">
+                      Other
+                    </option>
+                  </select>
+                </label>
 
-          <option value="other">
-            Other
-          </option>
-        </select>
-      </label>
+                <label>
+                  <span>Tell us about it</span>
 
-      <label>
-        <span>Tell us about it</span>
+                  <textarea
+                    name="message"
+                    rows={5}
+                    required
+                  />
+                </label>
 
-        <textarea
-          name="message"
-          rows={5}
-          required
-        />
-      </label>
-
-      <button
-        className="form-submit"
-        type="submit"
-      >
-        Send enquiry
-        <span>→</span>
-      </button>
-    </form>
-  )}
-</div>
-
-
-  </div>
-</section>
-
+                <button
+                  className="form-submit"
+                  type="submit"
+                >
+                  Send enquiry
+                  <span>→</span>
+                </button>
+              </form>
+            )}
+          </div>
+        </div>
+      </section>
 
       <footer className="site-footer">
-  <div className="container footer-top">
-    <div className="footer-brand">
-      <img
-        className="nhl-logo"
-        src={logo}
-        alt="J-STONES Construction Company Limited"
-      />
+        <div className="container footer-top">
+          <div className="footer-brand">
+            <img
+              className="nhl-logo"
+              src={logo}
+              alt="J-STONES Construction Company Limited"
+            />
 
+            <div>
+              <strong>J-STONES CONSTRUCTION COMPANY LIMITED</strong>
 
-  <div>
-    <strong>J-STONES CONSTRUCTION COMPANY LIMITED</strong>
-    <span>
-      Design • Construction • Finishing
-    </span>
-  </div>
-</div>
+              <span>
+                Design • Construction • Finishing
+              </span>
+            </div>
+          </div>
 
-<div className="footer-links">
-  <a href="#home">Back to top ↑</a>
-  <Link to="/admin">Admin</Link>
-</div>
+          <div className="footer-links">
+            <a href="#home">Back to top ↑</a>
+            <Link to="/admin">Admin</Link>
+          </div>
+        </div>
 
+        <div className="container footer-bottom">
+          <span>
+            © {new Date().getFullYear()} J-STONES Construction Company Limited
+          </span>
 
-  </div>
+          <span>Built in Nigeria</span>
+        </div>
+      </footer>
+      <a
+  className="floating-whatsapp"
+  href="https://wa.me/2349067295196?text=Hello%20J-STONES%20Construction%2C%20I%20found%20your%20website%20and%20would%20like%20to%20discuss%20a%20project%20with%20you."
+  target="_blank"
+  rel="noreferrer"
+  aria-label="Chat with J-STONES Construction on WhatsApp"
+>
+  <svg
+    viewBox="0 0 24 24"
+    aria-hidden="true"
+  >
+    <path
+      d="M20.52 3.48A11.86 11.86 0 0 0 12.05 0C5.5 0 .17 5.32.17 11.88c0 2.09.55 4.13 1.59 5.93L.1 24l6.34-1.66a11.85 11.85 0 0 0 5.61 1.42h.01c6.55 0 11.88-5.33 11.88-11.88 0-3.17-1.23-6.15-3.42-8.4ZM12.06 21.77h-.01a9.86 9.86 0 0 1-5.03-1.38l-.36-.21-3.76.98 1-3.66-.23-.38a9.87 9.87 0 1 1 8.39 4.65Zm5.42-7.4c-.3-.15-1.77-.87-2.05-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.47-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.49s1.07 2.89 1.22 3.09c.15.2 2.1 3.2 5.09 4.49.71.31 1.26.5 1.69.64.71.23 1.36.2 1.87.12.57-.08 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35Z"
+    />
+  </svg>
 
-  <div className="container footer-bottom">
-    <span>
-      © {new Date().getFullYear()} J-STONES Construction Company Limited
-    </span>
-
-
-<span>Built in Nigeria</span>
-
-
-  </div>
-</footer>
-
+  <span>Chat with us</span>
+</a>
     </main>
   )
 }
-
